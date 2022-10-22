@@ -64,10 +64,13 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
-    {
+    protected function create(array $data){
+        $role_id=2;
+        if (!empty($data['role'])) {
+            $role_id=$data['role'];
+        }
         return User::create([
-            'role_id'=> 2,
+            'role_id'=> $role_id,
             'full_name' => $data['full_name'],
             'surnames' => $data['surnames'],
             'phone' => $data['phone'],

@@ -24,4 +24,4 @@
 <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
-@include('partials.scrips')
+@include('partials.scripts')

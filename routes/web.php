@@ -19,8 +19,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'redirectUser'])->name('home');
 
 Route::get('/test',function(){
-    return view('test');
+    return view('tienda');
 });

@@ -1,3 +1,6 @@
+ <!-- Layout wrapper -->
+ <div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
 <!-- Menu -->
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
@@ -179,6 +182,25 @@
           </li>
         </ul>
       </li>
+      <!-- menu user-->
+      <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">Administrador</span>
+      </li>
+      <li class="menu-item">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+          <div data-i18n="Authentications">{{Auth::user()->full_name." - admin"}}</div>
+        </a>
+        <ul class="menu-sub">
+          <li class="menu-item">
+            <a class="menu-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ 'Cerrar sesion' }}</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+          </li>
+        </ul>
+      </li>
+
       <!-- Components -->
       <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
       <!-- Cards -->

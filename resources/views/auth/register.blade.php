@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.authmain')
 
 @section('pagecss')
 <link rel="stylesheet" href="{{asset('vendor/css/pages/page-auth.css')}}" />
