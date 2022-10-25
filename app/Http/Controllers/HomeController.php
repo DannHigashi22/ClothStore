@@ -26,6 +26,6 @@ class HomeController extends Controller
         if(Auth::user()->role->name=='Admin'){
             return view('admin.dash');
         }
-        return redirect()->route('/');
+        return redirect()->route('index');
     }
 }

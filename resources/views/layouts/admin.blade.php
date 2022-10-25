@@ -1,9 +1,9 @@
-@include('layouts.header')
+@include('partials.header')
 
 @section('container')
     @include('partials.menu')
     
     @yield('content')
     
-    @include('layouts.footer')
+    @include('partials.footer')
 @show

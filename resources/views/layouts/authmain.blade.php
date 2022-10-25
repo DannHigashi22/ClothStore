@@ -1,5 +1,5 @@
-@include('layouts.header')
+@include('partials.header')
 
 @yield('content')
 
-@include('layouts.footer');
+@include('partials.footer');
