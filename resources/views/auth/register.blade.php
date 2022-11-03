@@ -13,7 +13,7 @@
           <div class="card-body">
             <!-- Logo -->
             <div class="app-brand justify-content-center">
-              <a href="index.html" class="app-brand-link gap-2">
+              <a href="{{route('index')}}" class="app-brand-link gap-2">
                 <span class="app-brand-logo demo">
                   <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                     <defs>
@@ -70,71 +70,7 @@
             <h4 class="mb-2">Bienvenido a ClothStore 🚀</h4>
             <p class="mb-4">Registrate para comenzar tu aventura</p>
 
-            <form id="formAuthentication" class="mb-3" action="{{ route('register') }}" method="POST">
-                @csrf
-              <div class="mb-3">
-                <label for="full_name" class="form-label">Nombres </label>
-                <input type="text" class="form-control @error('full_name') is-invalid @enderror" id="full_name" name="full_name" placeholder="Ingrese nombres" autofocus/>
-                @error('full_name')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-              </div>
-              <div class="mb-3">
-                <label for="surnames" class="form-label">Apellidos</label>
-                <input type="text" class="form-control @error('surnames') is-invalid @enderror" id="surnames" name="surnames" placeholder="Ingrese sus apellidos" autofocus/>
-                @error('surnames')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter your email" />
-                @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-              </div>
-              <div class="mb-3">
-                <label class="form-label" for="phone">Telefono</label>
-                <input type="text" id="phone" name="phone" class="form-control phone-mask @error('phone') is-invalid @enderror" placeholder="912345678"/>
-                @error('phone')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-              </div>
-              <div class="mb-3">
-                <label class="form-label" for="password">Contraseña</label>
-                <div class="">
-                  <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="********" aria-describedby="password"/>
-                  @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="password-confirm" class="form-label">Confirmar Contraseña</label>
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-              </div>
-
-              <div class="mb-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
-                  <label class="form-check-label" for="terms-conditions">
-                    Acepto los
-                    <a href="javascript:void(0);">Terminos de privacidad</a>
-                  </label>
-                </div>
-              </div>
-              <button class="btn btn-primary d-grid w-100">Registrar</button>
-            </form>
+            @include('includes.user-register',['url'=>'register'])
 
             <p class="text-center">
               <span>Tienes cuenta?</span>

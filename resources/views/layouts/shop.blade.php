@@ -3,7 +3,7 @@
 @include('partials.navbar')
 
 <!-- Content -->
-<div class="container-fluid">
+<div class="container-fluid min-vh-100">
     @yield('content')
 </div>
 <!-- / Content -->

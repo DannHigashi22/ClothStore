@@ -1,4 +1,4 @@
- <!-- Footer -->
+<!-- Footer -->
 <footer class="footer bg-light">
   <div class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
     <div>
@@ -23,16 +23,15 @@
   </div>
 </footer>
   <!-- / Footer -->
-
-  <div class="content-backdrop fade"></div>
+<div class="content-backdrop fade"></div>
 </div>
 <!-- Content wrapper -->
-</div>
+  </div>
 <!-- / Layout page -->
 </div>
-
 <!-- Overlay -->
 <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
+
 @include('partials.scripts')

@@ -51,31 +51,35 @@
             <div class="tab-content">
               <div class="tab-pane fade show active" id="navs-justified-home" role="tabpanel">
                 <p>
-                  Icing pastry pudding oat cake. Lemon drops cotton candy caramels cake caramels sesame snaps
-                  powder. Bear claw candy topping.
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae cumque id autem, consectetur voluptate ea veritatis voluptas amet nulla asperiores velit omnis aliquam error! Ipsam laborum eligendi sed accusantium voluptas.
                 </p>
                 <p class="mb-0">
-                  Tootsie roll fruitcake cookie. Dessert topping pie. Jujubes wafer carrot cake jelly. Bonbon
-                  jelly-o jelly-o ice cream jelly beans candy canes cake bonbon. Cookie jelly beans marshmallow
-                  jujubes sweet.
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi temporibus nesciunt, magnam velit repellendus suscipit voluptatum quas provident consequuntur. Ex corporis dignissimos ratione sed facilis quidem eos voluptatum, voluptatem molestias?
                 </p>
               </div>
               <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
-                <p>
-                  Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice
-                  cream. Gummies halvah tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream
-                  cheesecake fruitcake.
-                </p>
-                <p class="mb-0">
-                  Jelly-o jelly beans icing pastry cake cake lemon drops. Muffin muffin pie tiramisu halvah
-                  cotton candy liquorice caramels.
-                </p>
+                <h3>Comentarios de nuestros compradores</h3>
+                <div class="row">
+                  <div class="col-12">
+                    <p class="mb-0">Comprador 1 :</p>
+                    <p class="mt-0">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae cumque id autem, consectetur voluptate ea veritatis voluptas amet nulla asperiores velit omnis aliquam error! Ipsam laborum eligendi sed accusantium voluptas.
+                    </p>
+                  </div>
+                  <hr>
+                  <div class="col-12">
+                    <p class="mb-0">Comprador 2 :</p>
+                    <p class="mt-0">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae cumque id autem, consectetur voluptate ea veritatis voluptas amet nulla asperiores velit omnis aliquam error! Ipsam laborum eligendi sed accusantium voluptas.
+                    </p>
+                  </div>
+                </div>
               </div>
               
             </div>
           </div>
           <h2 class="mb-1 text-center">Productos relacionados</h6>
-            <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-4 mb-5">
+            <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-4 mb-5 mt-0">
                     <div class="col">
                       <div class="card h-100 text-center">
                         <img class="card-img-top" src="{{asset('img/elements/foto1.jpg')}}" alt="Card image cap" />

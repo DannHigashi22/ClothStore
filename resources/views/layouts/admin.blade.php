@@ -4,6 +4,6 @@
     @include('partials.menu')
     
     @yield('content')
-    
+
     @include('partials.footer')
 @show

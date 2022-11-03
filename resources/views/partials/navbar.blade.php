@@ -59,7 +59,7 @@
                         <li><a class="dropdown-item" href="javascript:void(0)">Mi perfil <i class='bx bx-lock-open-alt'></i></a></li>
                         <li><a class="dropdown-item" href="javascript:void(0)">Mis compras <i class='bx bx-cart-alt'></i></a></li>
                         @if (Auth::user()->role->name=='Admin')
-                            <li><a class="dropdown-item" href="javascript:void(0)">Gestion Tienda <i class='bx bx-bar-chart-alt-2'></i></a></li>
+                            <li><a class="dropdown-item" href="{{route('home')}}">Gestion Tienda <i class='bx bx-bar-chart-alt-2'></i></a></li>
                         @endif
                         <li>
                             <hr class="dropdown-divider" />
