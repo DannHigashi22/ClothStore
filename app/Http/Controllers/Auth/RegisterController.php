@@ -50,12 +50,12 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return Validator::make($data,[
             'full_name' => ['required', 'string', 'max:255'],
             'surnames' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'int', 'min:8'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
             'terms'=>['accepted'],
         ]);
     }
@@ -64,7 +64,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \Illuminate\Support\Facades\Redirect;
+     * @return App\Models\User;
      */
     protected function create(array $data){
         $role_id=2;

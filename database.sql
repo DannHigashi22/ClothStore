@@ -5,7 +5,7 @@ thumnail    varchar(255),
 created_at  DATETIME,  
 updated_at  DATETIMe,
 CONSTRAINT pk_categories PRIMARY KEY(id)
-)Engine=InnoDB;
+)Engine=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 CREATE Table role(
 id          int(255) AUTO_INCREMENT NOT NULL,
@@ -14,15 +14,15 @@ created_at  DATETIME,
 updated_at  DATETIME,
 CONSTRAINT pk_role PRIMARY KEY(id),
 CONSTRAINT uq_name UNIQUE(name)
-)Engine=InnoDB;
+)Engine=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 CREATE Table password_resets(
 email       varchar(255) NOT NULL,
 token       varchar(255) not NULL,
 created_at  DATETIME,  
 updated_at  DATETIME,
-CONSTRAINT index_email INDEX(email)
-)Engine=InnoDB;
+INDEX(email)
+)Engine=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 CREATE Table users(
 id          int(255) AUTO_INCREMENT NOT NULL,
@@ -39,7 +39,7 @@ updated_at  DATETIME,
 CONSTRAINT pk_users PRIMARY KEY(id),
 CONSTRAINT fk_user_role FOREIGN KEY(role_id) REFERENCES role(id), 
 CONSTRAINT uq_email UNIQUE(email)
-)Engine=InnoDB;
+)Engine=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 CREATE Table products(
 id              int(255) AUTO_INCREMENT NOT NULL,
@@ -55,7 +55,7 @@ updated_at      DATETIME,
 CONSTRAINT pk_products PRIMARY KEY(id),
 CONSTRAINT fk_product_category FOREIGN KEY(category_id) REFERENCES categories(id), 
 CONSTRAINT uq_barcode UNIQUE(barcode)
-)Engine=InnoDB;
+)Engine=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 CREATE Table orders(
 id                  int(255) AUTO_INCREMENT NOT NULL,
@@ -67,7 +67,7 @@ created_at          DATETIME,
 updated_at          DATETIME,
 CONSTRAINT pk_orders PRIMARY KEY(id),
 CONSTRAINT fk_orders_users FOREIGN KEY(user_id) REFERENCES users(id) 
-)Engine=InnoDB;
+)Engine=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 CREATE Table orders_detail(
 id          int(255) AUTO_INCREMENT NOT NULL,
@@ -81,6 +81,6 @@ updated_at  DATETIME,
 CONSTRAINT pk_orders_detail PRIMARY KEY(id),
 CONSTRAINT fk_detail_order FOREIGN KEY(order_id) REFERENCES orders(id),
 CONSTRAINT fk_detail_product FOREIGN KEY(product_id) REFERENCES products(id)
-)Engine=InnoDB;
+)Engine=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 

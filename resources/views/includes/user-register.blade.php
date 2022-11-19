@@ -2,7 +2,7 @@
     @csrf
   <div class="mb-3">
     <label for="full_name" class="form-label">Nombres </label>
-    <input type="text" class="form-control @error('full_name') is-invalid @enderror" id="full_name" name="full_name" placeholder="Ingrese nombres" autofocus/>
+    <input type="text" class="form-control @error('full_name') is-invalid @enderror" id="full_name" name="full_name" value="{{ old('full_name') }}" placeholder="Ingrese nombres" autofocus/>
     @error('full_name')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -11,7 +11,7 @@
   </div>
   <div class="mb-3">
     <label for="surnames" class="form-label">Apellidos</label>
-    <input type="text" class="form-control @error('surnames') is-invalid @enderror" id="surnames" name="surnames" placeholder="Ingrese sus apellidos" autofocus/>
+    <input type="text" class="form-control @error('surnames') is-invalid @enderror" id="surnames" name="surnames" value="{{ old('surnames') }}" placeholder="Ingrese sus apellidos"/>
     @error('surnames')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -20,7 +20,7 @@
   </div>
   <div class="mb-3">
     <label for="email" class="form-label">Email</label>
-    <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Ingresa tu email" />
+    <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" placeholder="Ingresa tu email" />
     @error('email')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -29,7 +29,7 @@
   </div>
   <div class="mb-3">
     <label class="form-label" for="phone">Telefono</label>
-    <input type="text" id="phone" name="phone" class="form-control phone-mask @error('phone') is-invalid @enderror" placeholder="912345678"/>
+    <input type="text" id="phone" name="phone" class="form-control phone-mask @error('phone') is-invalid @enderror"  value="{{ old('phone') }}"placeholder="912345678"/>
     @error('phone')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -44,7 +44,7 @@
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
-    @enderror
+      @enderror
     </div>
   </div>
   <div class="mb-3">
@@ -56,10 +56,15 @@
   @if (Auth::user()->role->name == 'Admin')
   <div class="mb-3">
     <label for="Role" class="form-label">Role</label>
-    <select name="role" class="form-select" id="role" aria-label="Default select example">
+    <select name="role" class="form-select @error('role') is-invalid @enderror" id="role" aria-label="Default select example">
       <option value="1">Admin</option>
       <option value="2" selected>Usuario/Cliente</option>
     </select> 
+    @error('role')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+      @enderror
   </div>
   @endif
   @else

@@ -74,7 +74,7 @@
       <!-- Dashboard -->
       <li class="menu-item">
         <a href="{{route('admin')}}" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <i class='menu-icon tf-icons bx bxs-dashboard' ></i>
           <div data-i18n="Analytics">Dashboard</div>
         </a>
       </li>
@@ -82,7 +82,7 @@
       <!-- Layouts -->
       <li class="menu-item">
         <a href="" class="menu-link">
-          <i class="menu-icon tf-icons bx bxs-shopping-bag-alt"></i>
+          <i class='menu-icon tf-icons bx bxs-shopping-bags' ></i>
           <div data-i18n="Layouts">Pedidos</div>
         </a>
       </li>
@@ -91,14 +91,26 @@
         <span class="menu-header-text">Gestion</span>
       </li>
       <li class="menu-item">
-        <a href="" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-dock-top"></i>
+        <a href="" class="menu-link menu-toggle">
+          <i class='menu-icon tf-icons bx bx-category'></i>
           <div data-i18n="Account Settings">Categorias</div>
         </a>
+        <ul class="menu-sub">
+          <li class="menu-item">
+            <a href="{{route('a-category-create')}}" class="menu-link">
+              <div data-i18n="Basic">Añadir Categoria</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="{{route('a-categories')}}" class="menu-link">
+              <div data-i18n="Basic">Ver Todos</div>
+            </a>
+          </li>
+        </ul>
       </li>
       <li class="menu-item">
         <a href="" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+          <i class='menu-icon tf-icons bx bx-closet'></i>
           <div data-i18n="Authentications">Productos</div>
         </a>
         <ul class="menu-sub">
@@ -116,7 +128,7 @@
       </li>
       <li class="menu-item">
         <a href="" class="menu-link">
-          <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+          <i class='menu-icon tf-icons bx bx-windows'></i>
           <div data-i18n="Authentications">Paginas</div>
         </a>
       </li>
@@ -126,7 +138,7 @@
       </li>
       <li class="menu-item">
         <a href="" class="menu-link menu-toggle">
-          <i class="menu-icon tf-icons bx bx-dock-top"></i>
+          <i class='menu-icon bx bxs-user-rectangle'></i>
           <div data-i18n="Authentications">Usuarios/Clientes</div>
         </a>
         <ul class="menu-sub">

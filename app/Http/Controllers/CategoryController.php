@@ -9,5 +9,17 @@ class CategoryController extends Controller
 {
     public function getAll(){
         $categories=Category::all();
+        return view('admin.category.categories',['categories'=>$categories]);
+    }
+
+    public function create(){
+        return view('admin.category.create');
+    }
+
+    public function save(Request $request){
+        $validate=$this->validate($request, [
+            'name' => 'required|alpha|max:25|unique:categories',
+        ]);
+
     }
 }

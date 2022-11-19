@@ -24,8 +24,8 @@ class AdminController extends Controller
 
     public function userSave(Request $request){
         $validator=$this->validate($request,[
-            'full_name' => ['required', 'string', 'max:255'],
-            'surnames' => ['required', 'string', 'max:255'],
+            'full_name' => ['required', 'alpha', 'max:255'],
+            'surnames' => ['required', 'alpha', 'max:255'],
             'phone' => ['required', 'int', 'min:8'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed']
@@ -50,9 +50,9 @@ class AdminController extends Controller
         ]);
         return redirect()->route('a-users')->with(['message'=>'Usuario Creado correctamente']);
     }
+    //----end
 
     //products methods
-
     public function productCreate(){
         return view('admin.create-product');
     }
