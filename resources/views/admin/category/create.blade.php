@@ -11,8 +11,8 @@
             <form id="formAuthentication" class="mb-3" action="{{route('a-category-save')}}" method="POST">
                 @csrf
               <div class="mb-3">
-                <label for="full_name" class="form-label">Nombre</label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nombre de categoria" autofocus/>
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="nombre" name="name" placeholder="Nombre de categoria" autofocus/>
                 @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

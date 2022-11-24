@@ -38,6 +38,9 @@ Route::middleware([Admin::class])->group(function(){
     Route::get('/admin/categories',[CategoryController::class,'getAll'])->name('a-categories');
     Route::get('/admin/categories/create',[CategoryController::class,'create'])->name('a-category-create');
     Route::post('/admin/categories/create',[CategoryController::class,'save'])->name('a-category-save');
+    Route::get('/admin/categories/edit/{id}',[CategoryController::class,'edit'])->name('a-category-edit');
+    Route::post('/admin/categories/update/',[CategoryController::class,'update'])->name('a-category-update');
+    Route::get('/admin/categories/delete/{id}',[CategoryController::class,'delete'])->name('a-category-delete');
     //products 
     Route::get('/admin/product/create',[AdminController::class,'productCreate'])->name('a-product-create');
     Route::post('/admin/product/save',[AdminController::class,'productSave'])->name('a-product-save');   
