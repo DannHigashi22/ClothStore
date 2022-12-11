@@ -41,11 +41,11 @@ class User extends Authenticatable
     //relaciones
     
     public function role(){
-        return $this->belongsTo(Role::class);
+        return $this->belongsTo(Role::class,'role_id');
     }
 
     public function orders(){
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class)->orderBy('id','desc');;
     }
 
 }

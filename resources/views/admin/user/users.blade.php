@@ -7,10 +7,17 @@
     <div class="content-wrapper">
         <!-- Content -->
         <div class="container-xxl min-vh-100">
-            <h5 class="card-header">Usuarios/Clientes</h5>
+          <div class="row">
+            <div class="col-6">
+              <h5 class="card-header">Usuarios/Clientes</h5>
+            </div>
+            <div class="col-6 align-self-center">
+              <a class="btn btn-primary float-end me-4" href="{{route('a-user-register')}}"><i class='bx bx-plus-circle'></i>Añadir </a>
+            </div>
             @if(session('message'))
                 <div class="alert alert-success">{{session('message')}}</div>
             @endif
+          </div>
                 <div class="table-responsive h-75">
                   <table class="table">
                     <thead class="table-dark">

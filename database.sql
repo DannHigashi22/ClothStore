@@ -57,6 +57,16 @@ CONSTRAINT fk_product_category FOREIGN KEY(category_id) REFERENCES categories(id
 CONSTRAINT uq_barcode UNIQUE(barcode)
 )Engine=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
+CREATE Table images(
+id              int(255) AUTO_INCREMENT NOT NULL,
+product_id      int(255) ,
+image_path      varchar(255) not NULL,
+created_at      DATETIME,  
+updated_at      DATETIME,
+CONSTRAINT pk_image PRIMARY KEY(id),
+CONSTRAINT fk_iamge_category FOREIGN KEY(product_id) REFERENCES product(id), 
+)Engine=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
 CREATE Table orders(
 id                  int(255) AUTO_INCREMENT NOT NULL,
 user_id             int(255) ,

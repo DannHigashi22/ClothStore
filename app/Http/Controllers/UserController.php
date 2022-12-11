@@ -8,7 +8,7 @@ use App\Models\User;
 class UserController extends Controller{
     public function edit($id){
         $user=User::findorfail($id);
-        return view('admin.user-edit',[
+        return view('admin.user.user-edit',[
             'user'=>$user
         ]);
     }

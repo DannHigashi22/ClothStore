@@ -15,11 +15,11 @@ class AdminController extends Controller
     //users methods
     public function allUsers(){
         $users=User::all();
-        return view('admin.users',['users'=>$users]);
+        return view('admin.user.users',['users'=>$users]);
     }
 
     public function userRegister(){
-        return view('admin.user-register');
+        return view('admin.user.user-register');
     }
 
     public function userSave(Request $request){
@@ -50,14 +50,5 @@ class AdminController extends Controller
         ]);
         return redirect()->route('a-users')->with(['message'=>'Usuario Creado correctamente']);
     }
-    //----end
-
-    //products methods
-    public function productCreate(){
-        return view('admin.create-product');
-    }
-    public function productSave(Request $request){
-        
-    }
-
+    
 }

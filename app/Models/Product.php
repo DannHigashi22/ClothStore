@@ -10,10 +10,14 @@ class Product extends Model
     use HasFactory;
 
     public function category(){
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class,'category_id');
     }
 
     public function order_detail(){
         return $this->hasMany(Order_detail::class);
+    }
+
+    public function images(){
+        return $this->hasMany(Image::class);
     }
 }

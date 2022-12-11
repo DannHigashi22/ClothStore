@@ -7,9 +7,9 @@
     <div class="content-wrapper">
         <!-- Content -->
         <div class="container-xxl">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Categorias /</span> Editar</h4>
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Productos /</span> Editar</h4>
           <div class="card mb-4">
-            <h5 class="card-header">Detalles </h5>
+            <h5 class="card-header">Detalles</h5>
             <!-- Account -->
             <div class="card-body">
               <form  method="POST" action="{{route('a-category-update')}}">

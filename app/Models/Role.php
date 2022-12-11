@@ -13,6 +13,6 @@ class Role extends Model
 
     //relaciones
     public function user(){
-        return $this->hasMany(User::class);
+        return $this->hasMany(User::class)->orderBy('id','desc');
     }
 }
