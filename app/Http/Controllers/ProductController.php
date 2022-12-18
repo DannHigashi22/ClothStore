@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -33,8 +34,8 @@ class ProductController extends Controller
             'stock' => ['required','int'],
             'barcode' => ['required','int','unique:products,barcode'],
             'category' => ['required','int','exists:App\Models\Category,id'],
-            'images'=>['required','max:2048'],
-            'images.*'=>['mimes:jpeg,png,jpg,svg']
+            'images'=>['required','array','max:4'],
+            'images.*'=>['mimes:jpeg,png,jpg,svg','image','max:2048']
         ]);
         if($images =$request->file('images')){
             $product=new Product();
@@ -56,9 +57,20 @@ class ProductController extends Controller
             ]);
            }        
         }
-        return \redirect()->route('a-products')->with(['message'=>'producto añadida correctamente']);
+        return \redirect()->route('a-products')->with(['message'=>'Producto añadido correctamente']);
         
     }
+
+    public function getOne($id){
+        $product=Product::findorfail($id);
+        return view('admin.product.product',['product'=>$product]);
+    }
+
+    public function getImage($filename){
+        $file=Storage::disk('images')->get($filename);
+        return new Response($file,200);
+    }
+    
 
     /*public function edit($id){
         $cate=Product::findorfail($id);

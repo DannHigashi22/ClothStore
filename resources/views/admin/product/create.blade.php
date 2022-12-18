@@ -6,7 +6,7 @@
       <!-- Content wrapper -->
   <div class="content-wrapper">
       <!-- Content -->
-      {{var_dump($errors->all())}}
+      
       <div class="container-xxl flex-grow-1 container-p-y">
         <h5 class="card-header">Creacion de productos</h5>
         <form id="formAuthentication" class="mb-3" action="{{route('a-product-save')}}" method="POST" enctype="multipart/form-data">
@@ -79,7 +79,7 @@
             @enderror
             @error('images.*')
                 <span class="invalid-feedback" role="alert">
-                    <strong>{{'Las imaganes deben ser de tipo: jpeg, png, jpg, svg.' }}</strong>
+                    <strong>{{$message}}</strong>
                 </span>
             @enderror
           </div>

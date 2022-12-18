@@ -35,10 +35,11 @@
                   <tbody class="table-border-bottom-0">
                       @foreach ($products as $product)
                           <tr>
-                              <td><i class="text-danger"></i><strong>{{$product->name}}</strong></td>
-                              <td>{{$product->created_at}}</td>
+                              <td><a href="{{route('a-product',['id'=>$product->id])}}"><i class="text-danger"></i><strong>{{$product->name}}</strong></a></td>
+                              <td>{{$product->price}}$</td>
+                              <td>{{$product->stock}} Unidades</td>
                               <td>
-                                  <a class="btn btn-primary" href="{{route('',['id'=>$product->id])}}"><i class='bx bxs-edit-alt'></i></a>
+                                  <a class="btn btn-primary" href=""><i class='bx bxs-edit-alt'></i></a>
                                   <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                     <i class='bx bxs-trash-alt'></i>
                                   </button>
@@ -67,7 +68,7 @@
                 </div>
               </div>
             @elseif(!session('message_error'))
-                <div class="alert alert-info">No hay productos creadas</div>
+                <div class="alert alert-info">No hay productos creados</div>
             @endif     
         </div>
         <!-- / Content -->
