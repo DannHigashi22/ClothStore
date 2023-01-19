@@ -55,4 +55,10 @@ class CategoryController extends Controller
         $cate->delete();
         return redirect()->route('a-categories')->with(['message'=>'Categoria borrada correctamente']);
     }
+
+    /*Store functions */
+    public function getById($id){
+        $category=Category::findorfail($id);
+        return view('products.category',['category'=>$category]);
+    }
 }

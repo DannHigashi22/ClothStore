@@ -25,7 +25,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     @foreach ($categories as $category)
-                        <li><a class="dropdown-item" href="javascript:void(0)">Camisas </a></li>
+                        <li><a class="dropdown-item" href="{{route('s-category',['id'=>$category->id])}}">{{$category->name}} </a></li>
                     @endforeach
                 </ul>
             </li>

@@ -23,6 +23,7 @@ Route::get('/home', [HomeController::class, 'redirectUser'])->name('home');
 
 Route::get('/',[HomeController::class,'index'])->name('index');
 Route::get('/product/{id}',[ProductController::class,'getId'])->name('s-product');
+Route::get('/category/{id}',[CategoryController::class,'getById'])->name('s-category');
 
 Auth::routes();
 

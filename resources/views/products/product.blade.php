@@ -1,18 +1,17 @@
 @extends('layouts.shop')
 @section('title',"ClothStore - $product->name")
-@section('title','producto1')
 
 @section('content')
 <div class="container-xxl mt-2">
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-style1">
       <li class="breadcrumb-item">
-        <a href="javascript:void(0);">Home</a>
+        <a href="{{route('index')}}">Home</a>
       </li>
       <li class="breadcrumb-item">
-        <a href="javascript:void(0);">Library</a>
+        <a href="javascript:void(0);">{{$product->category->name}}</a>
       </li>
-      <li class="breadcrumb-item active">Data</li>
+      <li class="breadcrumb-item active">{{$product->name}}</li>
     </ol>
   </nav>
   <!--product-->
@@ -41,7 +40,7 @@
         <div class="col-sm-6 col-lg-8 mb-4">
             <div class="">
                 <h2>{{$product->name}}</h2>
-                <p>${{$product->price}}</p>
+                <h3>${{$product->price}}</h3>
                 <button class="btn btn-primary btn-md" type="button">Añadir al carro <i class='bx bxs-cart-add bx-sm'></i></button>
             </div>
             <div class="mt-2">
@@ -75,7 +74,7 @@
                   <h3 class="text-center">Comentarios de nuestros compradores</h3>
                     @foreach ($product->commentaries as $commentary)
                       <div class="col-12">
-                        <p class="mb-0">{{$commentary->user->name}} :
+                        <p class="mb-0">{{$commentary->user->full_name}} : 
                           <i class='bx {{$commentary->star >=1 ?'bxs-star': 'bx-star' }}'></i>
                           <i class='bx {{$commentary->star >=2 ?'bxs-star': 'bx-star' }}'></i>
                           <i class='bx {{$commentary->star >=3 ?'bxs-star': 'bx-star' }}'></i>
