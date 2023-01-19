@@ -24,12 +24,9 @@
                 Categorias
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="javascript:void(0)">Camisas </a></li>
-                <li><a class="dropdown-item" href="javascript:void(0)">Poleras </a></li>
-                <li><a class="dropdown-item" href="javascript:void(0)">Pantalones </a></li>
-                <li><a class="dropdown-item" href="javascript:void(0)">Polerones </a></li>
-                <li><a class="dropdown-item" href="javascript:void(0)">Zapatos </a></li>
-                <li><a class="dropdown-item" href="javascript:void(0)">Zapatillas </a></li>
+                    @foreach ($categories as $category)
+                        <li><a class="dropdown-item" href="javascript:void(0)">Camisas </a></li>
+                    @endforeach
                 </ul>
             </li>
           <li class="nav-item">
@@ -59,7 +56,7 @@
                         <li><a class="dropdown-item" href="javascript:void(0)">Mi perfil <i class='bx bx-lock-open-alt'></i></a></li>
                         <li><a class="dropdown-item" href="javascript:void(0)">Mis compras <i class='bx bx-cart-alt'></i></a></li>
                         @if (Auth::user()->role->name=='Admin')
-                            <li><a class="dropdown-item" href="{{route('home')}}">Gestion Tienda <i class='bx bx-bar-chart-alt-2'></i></a></li>
+                            <li><a class="dropdown-item" href="{{route('admin')}}">Gestion Tienda <i class='bx bx-bar-chart-alt-2'></i></a></li>
                         @endif
                         <li>
                             <hr class="dropdown-divider" />

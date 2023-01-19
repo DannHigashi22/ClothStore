@@ -39,7 +39,7 @@
                               <td>{{$product->price}}$</td>
                               <td>{{$product->stock}} Unidades</td>
                               <td>
-                                  <a class="btn btn-primary" href=""><i class='bx bxs-edit-alt'></i></a>
+                                  <a class="btn btn-primary" href="{{route('a-product-edit',['id'=>$product->id])}}"><i class='bx bxs-edit-alt'></i></a>
                                   <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                     <i class='bx bxs-trash-alt'></i>
                                   </button>
@@ -62,7 +62,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                      <a class="btn btn-outline-danger" href="{{route('a-category-delete',['id'=>$product->id])}}"><i class='bx bxs-trash-alt'></i> Eliminar</a>
+                      <a class="btn btn-outline-danger" href="{{route('a-product-delete',['id'=>$product->id])}}"><i class='bx bxs-trash-alt'></i> Eliminar</a>
                     </div>
                   </div>
                 </div>

@@ -93,4 +93,17 @@ CONSTRAINT fk_detail_order FOREIGN KEY(order_id) REFERENCES orders(id),
 CONSTRAINT fk_detail_product FOREIGN KEY(product_id) REFERENCES products(id)
 )Engine=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
+CREATE Table commentaries(
+id          int(255) AUTO_INCREMENT NOT NULL,
+user_id     int(255)
+product_id  int(255) ,
+description varchar(255) NOT NULL,
+star        INT(5) NOT NULL,
+created_at  DATETIME,  
+updated_at  DATETIME,
+CONSTRAINT pk_commentaries PRIMARY KEY(id),
+CONSTRAINT fk_commentary_product FOREIGN KEY(product_id) REFERENCES products(id)
+CONSTRAINT fk_commentary_user FOREIGN KEY(user_id) REFERENCES user(id)
+)Engine=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
 

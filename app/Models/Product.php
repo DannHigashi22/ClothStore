@@ -20,4 +20,8 @@ class Product extends Model
     public function images(){
         return $this->hasMany(Image::class);
     }
+
+    public function commentaries(){
+        return $this->hasMany(Commentery::class);
+    }
 }

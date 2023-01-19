@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','ClothStore - Administracion de Usuarios')
+@section('title','ClothStore - Mi Cuenta')
 @section('container')
 @parent
     @section('content')
@@ -7,9 +7,9 @@
     <div class="content-wrapper">
         <!-- Content -->
         <div class="container-xxl">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Usuarios /</span> Editar</h4>
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Cuenta /</span> Ajustes</h4>
           <div class="card mb-4">
-            <h5 class="card-header">Detalles del perfil</h5>
+            <h5 class="card-header">Detalles del perfil /<span class="text-muted fw-light">Creado el:{{$user->created_at}} </span></h5>
             <!-- Account -->
             <div class="card-body">
               <form  method="POST" action="{{url("/admin/user/edit/update/$user->id")}}">
@@ -77,18 +77,20 @@
             </div>
             <!-- /Account -->
           </div>
-          <div class="card">
-            <h5 class="card-header">Borrar Cuenta</h5>
-            <div class="card-body">
-              <div class="mb-3 col-12 mb-0">
-                <div class="alert alert-warning">
-                  <h6 class="alert-heading fw-bold mb-1">Esta Seguro que quiere eliminar esta cuenta?</h6>
-                  <p class="mb-0">Una vez borrada la cuenta,no hay vuelta atras.</p>
+          @if ($user->role->name =! 'Admin')
+            <div class="card">
+              <h5 class="card-header">Borrar Cuenta</h5>
+              <div class="card-body">
+                <div class="mb-3 col-12 mb-0">
+                  <div class="alert alert-warning">
+                    <h6 class="alert-heading fw-bold mb-1">Esta Seguro que quiere eliminar esta cuenta?</h6>
+                    <p class="mb-0">Una vez borrada la cuenta,no hay vuelta atras.</p>
+                  </div>
+                    <a class="btn btn-danger text-white" href="{{route("a-user-delete",['id'=>$user->id])}}">Borrar cuenta</a>
                 </div>
-                  <a class="btn btn-danger text-white" href="{{route("a-user-delete",['id'=>$user->id])}}">Borrar cuenta</a>
               </div>
             </div>
-          </div>
+          @endif
         </div>
     </div>
         <!-- / Content -->

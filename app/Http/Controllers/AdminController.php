@@ -15,11 +15,11 @@ class AdminController extends Controller
     //users methods
     public function allUsers(){
         $users=User::all();
-        return view('admin.user.users',['users'=>$users]);
+        return view('admin.user.u-all',['users'=>$users]);
     }
 
     public function userRegister(){
-        return view('admin.user.user-register');
+        return view('admin.user.u-register');
     }
 
     public function userSave(Request $request){

@@ -12,9 +12,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    /* Admin Functions*/
     public function getAll(){
         $products=Product::all();
-        return view('admin.product.products',['products'=>$products]);
+        return view('admin.product.p-all',['products'=>$products]);
     }
 
     public function create(){
@@ -23,7 +24,7 @@ class ProductController extends Controller
         if($categories->isEmpty()){
             return redirect()->route('a-products')->with(['message_error'=>'No puede crear un producto sin una categoria creada']);
         }
-        return view('admin.product.create',['categories'=> $categories]);
+        return view('admin.product.p-create',['categories'=> $categories]);
     }
 
     public function save(Request $request){
@@ -33,7 +34,7 @@ class ProductController extends Controller
             'price' => ['required','int'],
             'stock' => ['required','int'],
             'barcode' => ['required','int','unique:products,barcode'],
-            'category' => ['required','int','exists:App\Models\Category,id'],
+            'category' => ['required','exists:App\Models\Category,id','int'],
             'images'=>['required','array','max:4'],
             'images.*'=>['mimes:jpeg,png,jpg,svg','image','max:2048']
         ]);
@@ -63,7 +64,7 @@ class ProductController extends Controller
 
     public function getOne($id){
         $product=Product::findorfail($id);
-        return view('admin.product.product',['product'=>$product]);
+        return view('admin.product.p-detail',['product'=>$product]);
     }
 
     public function getImage($filename){
@@ -72,29 +73,70 @@ class ProductController extends Controller
     }
     
 
-    /*public function edit($id){
-        $cate=Product::findorfail($id);
-        return view('admin.category.category-edit',['category'=>$cate]);
+    public function edit($id){
+        $product=Product::findorfail($id);
+        $cate=Category::all();
+        return view('admin.product.p-edit',[
+            'product'=>$product,
+            'categories'=>$cate]);
     }
 
     public function update(Request $request){
-        $validate=$this->validate($request,[
-            'id'=>['exists:App\Models\Category,id'],
-            'name'=>['required','not_regex:/[0-9|_|-|$|@]/','string','unique:categories,$id']
-        ]);
         $id=$request->input('id');
-        $name=$request->input('name');
-        $cate=Product::find($id);
-        $cate->name=$name;
+        $validate=$this->validate($request, [
+            'id'=>['required','exists:App\Models\Product,id'],
+            'name' => ['required','not_regex:/[0-9|_|-|$|@]/','max:50',"unique:products,name,$id"],
+            'description' => ['required','string'],
+            'price' => ['required','int'],
+            'stock' => ['required','int'],
+            'barcode' => ['required','int',"unique:products,barcode,$id"],
+            'category' => ['required','int','exists:App\Models\Category,id'],
+            'images'=>['array','max:4'],
+            'images.*'=>['mimes:jpeg,png,jpg,svg','image','max:2048']
+        ]);
+        $product=Product::findorfail($id);
+        $product->name=Str::ucfirst($request->input('name'));
+        $product->description=Str::ucfirst($request->input('description'));
+        $product->price=$request->input('price');
+        $product->stock=$request->input('stock');
+        $product->barcode=$request->input('barcode');
+        $product->category_id=$request->input('category');
 
-        $cate->update();
+        $product->save();
+        if($images =$request->file('images')){
+            foreach ($product->images as $img) {
+                Storage::disk('images')->delete($img->image_path);
+            }
+            $product->images()->delete();
 
-        return redirect()->route('a-categories')->with(['message'=>'Categoria actualizada correctamente']);
+            foreach ($images as $image) {
+                $image_path=time().$image->getClientOriginalName();
+                Storage::disk('images')->put($image_path,\File::get($image));
+               
+                $product->images()->create([
+                    'image_path'=>$image_path
+                ]);
+            }       
+        }
+        return redirect()->route('a-products')->with(['message'=>'Producto actualizada correctamente']);
     }
+
     public function delete($id){
-        $cate=Product::findorfail($id);
-        $cate->delete();
-        return redirect()->route('a-categories')->with(['message'=>'Categoria borrada correctamente']);
-    }*/
+        $product=Product::findorfail($id);
+        foreach ($product->images as $img) {
+            Storage::disk('images')->delete($img->image_path);
+        }
+        $product->images()->delete();
+        $product->delete();
+        return redirect()->route('a-products')->with(['message'=>'Producto borrada correctamente']);
+    }
+
+    /*Store Functions*/
+
+    public function getId($id){
+        $product=Product::findorfail($id);
+        return view('products.product',['product'=>$product]);
+    }
+
 
 }

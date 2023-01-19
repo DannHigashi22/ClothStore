@@ -1,5 +1,5 @@
 @extends('layouts.shop')
-
+@section('title',"ClothStore - $product->name")
 @section('title','producto1')
 
 @section('content')
@@ -19,20 +19,34 @@
     <div class="row">
         <div class="col-sm-6 col-lg-4 mb-4" >
             <div class="card">
-              <img class="card-img-top" src="{{asset('img/elements/4.jpg')}}" alt="Card image cap">
+              <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  @foreach ($product->images as $key =>$image)
+                    <div class="carousel-item {{$key==1 ?'active' :''}}">
+                      <img class="card-img-top" src="{{route('a-product-image',['filename'=>$image->image_path])}}" alt="Card image cap">
+                    </div>
+                  @endforeach
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
             </div>
         </div>
         <div class="col-sm-6 col-lg-8 mb-4">
             <div class="">
-                <h2>Producto</h2>
-                <p>$1000</p>
+                <h2>{{$product->name}}</h2>
+                <p>${{$product->price}}</p>
                 <button class="btn btn-primary btn-md" type="button">Añadir al carro <i class='bx bxs-cart-add bx-sm'></i></button>
             </div>
             <div class="mt-2">
                 <h4>Descripcion</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore dolore odio et, similique obcaecati modi natus 
-                    dolor consequuntur explicabo illum quas dicta tempora fugiat pariatur, sunt debitis accusamus reprehenderit sit!
-                </p>
+                <p>{{$product->description}}</p>
             </div>
         </div>
         <div class="nav-align-top mb-4">
@@ -50,29 +64,35 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane fade show active" id="navs-justified-home" role="tabpanel">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae cumque id autem, consectetur voluptate ea veritatis voluptas amet nulla asperiores velit omnis aliquam error! Ipsam laborum eligendi sed accusantium voluptas.
-                </p>
+                <p>{{$product->description}}</p>
                 <p class="mb-0">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi temporibus nesciunt, magnam velit repellendus suscipit voluptatum quas provident consequuntur. Ex corporis dignissimos ratione sed facilis quidem eos voluptatum, voluptatem molestias?
                 </p>
               </div>
               <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
-                <h3>Comentarios de nuestros compradores</h3>
                 <div class="row">
-                  <div class="col-12">
-                    <p class="mb-0">Comprador 1 :</p>
-                    <p class="mt-0">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae cumque id autem, consectetur voluptate ea veritatis voluptas amet nulla asperiores velit omnis aliquam error! Ipsam laborum eligendi sed accusantium voluptas.
-                    </p>
-                  </div>
-                  <hr>
-                  <div class="col-12">
-                    <p class="mb-0">Comprador 2 :</p>
-                    <p class="mt-0">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae cumque id autem, consectetur voluptate ea veritatis voluptas amet nulla asperiores velit omnis aliquam error! Ipsam laborum eligendi sed accusantium voluptas.
-                    </p>
-                  </div>
+                  @if (count($product->commentaries) !=0)
+                  <h3 class="text-center">Comentarios de nuestros compradores</h3>
+                    @foreach ($product->commentaries as $commentary)
+                      <div class="col-12">
+                        <p class="mb-0">{{$commentary->user->name}} :
+                          <i class='bx {{$commentary->star >=1 ?'bxs-star': 'bx-star' }}'></i>
+                          <i class='bx {{$commentary->star >=2 ?'bxs-star': 'bx-star' }}'></i>
+                          <i class='bx {{$commentary->star >=3 ?'bxs-star': 'bx-star' }}'></i>
+                          <i class='bx {{$commentary->star >=4 ?'bxs-star': 'bx-star' }}'></i>
+                          <i class='bx {{$commentary->star >=5 ?'bxs-star': 'bx-star' }}'></i>
+                        </p>
+                        <p class="mt-0">
+                          {{$commentary->description}}
+                        </p>
+                      </div>
+                    @endforeach
+                  @else
+                    <div class="col-12">
+                      <h4>Sin Comentarios, compra este productos y ¡dejamos tu opinion de como te fue¡</h4>
+                    </div>
+                  @endif
+                  
                 </div>
               </div>
               
@@ -80,46 +100,25 @@
           </div>
           <h2 class="mb-1 text-center">Productos relacionados</h6>
             <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-4 mb-5 mt-0">
-                    <div class="col">
-                      <div class="card h-100 text-center">
-                        <img class="card-img-top" src="{{asset('img/elements/foto1.jpg')}}" alt="Card image cap" />
+              @foreach ($product->category->products as $cproduct)
+                @if ($product->id != $cproduct->id)
+                  <div class="col">
+                    <div class="card h-100 text-center">
+                    @php
+                        $image=$cproduct->images
+                    @endphp
+                      <a class="" href="{{route('s-product',['id'=>$cproduct->id])}}">
+                        <img class="card-img-top" src="{{route('a-product-image',['filename'=>$image[0]->image_path])}}" alt="Card image cap" />
                         <div class="card-body p-2">
-                          <h5 class="card-title text-center">Camisa</h5>
-                          <p class="card-text"> $35.000 CLP</p>
+                          <h5 class="card-title text-center">{{$cproduct->name}}</h5>
+                          <p class="card-text">${{$cproduct->price}} CLP</p>
                           <button class="btn btn-primary btn-lg" type="button">Añadir al carro <i class='bx bxs-cart-add bx-sm'></i></button>
                         </div>
-                      </div>
+                      </a>
                     </div>
-                    <div class="col">
-                      <div class="card h-100 text-center">
-                        <img class="card-img-top" src="{{asset('img/elements/13.jpg')}}" alt="Card image cap" />
-                        <div class="card-body p-2">
-                          <h5 class="card-title text-center">Camisa</h5>
-                          <p class="card-text"> $35.000 CLP</p>
-                          <button class="btn btn-primary btn-lg" type="button">Añadir al carro <i class='bx bxs-cart-add bx-sm'></i></button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="card h-100 text-center">
-                        <img class="card-img-top" src="{{asset('img/elements/4.jpg')}}" alt="Card image cap" />
-                        <div class="card-body p-2">
-                          <h5 class="card-title text-center">Camisa</h5>
-                          <p class="card-text"> $35.000 CLP</p>
-                          <button class="btn btn-primary btn-lg" type="button">Añadir al carro <i class='bx bxs-cart-add bx-sm'></i></button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="card h-100 text-center">
-                        <img class="card-img-top" src="{{asset('img/elements/18.jpg')}}" alt="Card image cap" />
-                        <div class="card-body p-2">
-                          <h5 class="card-title text-center">Camisa</h5>
-                          <p class="card-text"> $35.000 CLP</p>
-                          <button class="btn btn-primary btn-lg" type="button">Añadir al carro <i class='bx bxs-cart-add bx-sm'></i></button>
-                        </div>
-                      </div>
-                    </div>
+                  </div>  
+                @endif
+              @endforeach
             </div>
     </div>
 </div>

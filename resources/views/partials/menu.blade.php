@@ -205,7 +205,7 @@
             <div class="dropdown-divider"></div>
           </li>
           <li>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" href="{{route('a-user-edit')}}">
               <i class="bx bx-user me-2"></i>
               <span class="align-middle">Mi perfil</span>
             </a>

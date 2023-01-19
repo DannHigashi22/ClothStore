@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth; 
 
 class UserController extends Controller{
-    public function edit($id){
+    /*Admin Functions */
+
+    public function edit($id=null){
+        if (empty($id)) {
+            $id=Auth::user()->id;
+        }
         $user=User::findorfail($id);
-        return view('admin.user.user-edit',[
+        return view('admin.user.u-edit',[
             'user'=>$user
         ]);
     }
@@ -41,6 +47,9 @@ class UserController extends Controller{
 
     public function delete($id){
         $user=User::findorfail($id);
+        if ($user->role->name=='Admin') {
+            return \redirect()->route('a-users')->with(['message_error'=>'Error al borrar Usuario']);
+        }
         $user->delete();
         return \redirect()->route('a-users')->with(['message'=>'Usuario borrado correctamente']);
     }

@@ -48,4 +48,8 @@ class User extends Authenticatable
         return $this->hasMany(Order::class)->orderBy('id','desc');;
     }
 
+    public function commentaries(){
+        return $this->hasMany(Commentery::class);
+    }
+
 }

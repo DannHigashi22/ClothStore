@@ -10,11 +10,11 @@ class CategoryController extends Controller
 {
     public function getAll(){
         $categories=Category::all();
-        return view('admin.category.categories',['categories'=>$categories]);
+        return view('admin.category.c-all',['categories'=>$categories]);
     }
 
     public function create(){
-        return view('admin.category.create');
+        return view('admin.category.c-create');
     }
 
     public function save(Request $request){
@@ -33,7 +33,7 @@ class CategoryController extends Controller
 
     public function edit($id){
         $cate=Category::findorfail($id);
-        return view('admin.category.category-edit',['category'=>$cate]);
+        return view('admin.category.c-edit',['category'=>$cate]);
     }
 
     public function update(Request $request){

@@ -16,6 +16,8 @@
             </div>
             @if(session('message'))
                 <div class="alert alert-success">{{session('message')}}</div>
+            @elseif(session('message_error'))
+                <div class="alert alert-danger">{{session('message_error')}}</div>
             @endif
           </div>
                 <div class="table-responsive h-75">
@@ -32,16 +34,18 @@
                     </thead>
                     <tbody class="table-border-bottom-0">
                         @foreach ($users as $user)
+                          @if ($user->id != Auth::user()->id)
                             <tr>
-                                <td><i class="text-danger"></i><strong>{{$user->full_name}}</strong></td>
-                                <td>{{$user->surnames}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->phone}}</td>
-                                <td>{{$user->role->name}}</td>
-                                <td>
-                                    <a class="dropdown-item" href="{{route('a-user-edit',['id'=>$user->id])}}"><i class='bx bxs-edit-alt' ></i></a>
-                                </td>
+                              <td><i class="text-danger"></i><strong>{{$user->full_name}}</strong></td>
+                              <td>{{$user->surnames}}</td>
+                              <td>{{$user->email}}</td>
+                              <td>{{$user->phone}}</td>
+                              <td>{{$user->role->name}}</td>
+                              <td>
+                                  <a class="btn btn-primary" href="{{route('a-user-edit',['id'=>$user->id])}}"><i class='bx bxs-edit-alt' ></i></a>
+                              </td>
                             </tr>
+                          @endif
                         @endforeach
                     </tbody>
                   </table>

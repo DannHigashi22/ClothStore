@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -23,9 +25,20 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function redirectUser(){
+        $route='index';
+        
         if(Auth::user()->role->name=='Admin'){
-            return redirect()->route('admin');
+            $route='admin';
         }
-        return redirect()->route('index');
+
+        return redirect()->route($route);
+    }
+
+    public function index(){
+        $categories=Category::all();
+        $products=Product::all()->take(6);
+        return view('index',[
+            'products'=>$products
+        ]);
     }
 }

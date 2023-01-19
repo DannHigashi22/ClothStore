@@ -12,7 +12,7 @@ class Category extends Model
     protected $table='categories';
 
     //relaciones
-    public function product(){
+    public function products(){
         return $this->hasMany(Product::class);
     }
 }
