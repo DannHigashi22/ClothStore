@@ -13,7 +13,7 @@
             <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Usuarios /</span> Editar</h4>
           @endif
           <div class="card mb-4">
-            <h5 class="card-header">Detalles del perfil /<span class="text-muted fw-light">Creado el: {{$user->created_at}} </span></h5>
+            <h5 class="card-header">Detalles del perfil /<span class="text-muted fw-light">Creado el: {{date_format($user->created_at,'d/m/Y')}} </span></h5>
             <!-- Account -->
             <div class="card-body">
               <form  method="POST" action="{{url("/admin/user/edit/update/$user->id")}}">
@@ -75,13 +75,13 @@
                 </div>
                 <div class="mt-2">
                   <button type="submit" class="btn btn-primary me-2">Guardar Cambios</button>
-                  <button type="reset" class="btn btn-outline-secondary">Cancelar</button>
+                  <button type="reset" class="btn btn-outline-secondary">Deshacer </button>
                 </div>
               </form>
             </div>
             <!-- /Account -->
           </div>
-          @if ($user->role->name =! 'Admin')
+          @if (Auth::user()->role->name == 'Admin' && $user->role->name == 'User')
             <div class="card">
               <h5 class="card-header">Borrar Cuenta</h5>
               <div class="card-body">
@@ -90,7 +90,12 @@
                     <h6 class="alert-heading fw-bold mb-1">Esta Seguro que quiere eliminar esta cuenta?</h6>
                     <p class="mb-0">Una vez borrada la cuenta,no hay vuelta atras.</p>
                   </div>
-                    <a class="btn btn-danger text-white" href="{{route("a-user-delete",['id'=>$user->id])}}">Borrar cuenta</a>
+                  <form action="{{route("a-user-delete")}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="id" value="{{$user->id}}">
+                    <button type="submit" class="btn btn-danger"><i class='bx bxs-trash-alt'></i> Borrar Cuenta</button>
+                  </form>
                 </div>
               </div>
             </div>

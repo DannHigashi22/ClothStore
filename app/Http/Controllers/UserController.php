@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth; 
@@ -45,7 +46,8 @@ class UserController extends Controller{
         return \redirect()->route('a-users')->with(['message'=>'Usuario actualizado correctamente']);
     }
 
-    public function delete($id){
+    public function delete(Request $request){
+        $id=$request->id;
         $user=User::findorfail($id);
         if ($user->role->name=='Admin') {
             return \redirect()->route('a-users')->with(['message_error'=>'Error al borrar Usuario']);

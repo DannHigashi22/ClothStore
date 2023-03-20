@@ -9,3 +9,20 @@
 #img-detail{
   height: 25vh;
 }
+
+/*carrito*/
+.img-cart{
+  object-fit: cover;
+   object-position: center;
+   overflow: hidden;
+   height:6vh;
+}
+.quantity-card .input-group{
+  width: 125px;
+}
+
+@media (max-width: 576px) {
+  .quantity-card .input-group{
+    width: 113px;
+  } 
+ }

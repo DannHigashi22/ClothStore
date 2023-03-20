@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="{{asset('vendor/css/pages/page-auth.css')}}" />
 @endsection
 
+@section('title',"ClothStore - ")
+
 @section('content')
 <div class="container-xxl">
       <div class="authentication-wrapper authentication-basic container-p-y">

@@ -1,10 +1,12 @@
 CREATE Table categories(
 id          int(255) AUTO_INCREMENT not NULL,
 name        varchar(255) not NULL,
+slug        varchar(255) not null,
 thumnail    varchar(255), 
 created_at  DATETIME,  
-updated_at  DATETIMe,
-CONSTRAINT pk_categories PRIMARY KEY(id)
+updated_at  DATETIME,
+CONSTRAINT pk_categories PRIMARY KEY(id),
+CONSTRAINT uq_slug UNIQUE(slug)
 )Engine=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 CREATE Table role(
@@ -46,6 +48,7 @@ id              int(255) AUTO_INCREMENT NOT NULL,
 category_id     int(255) ,
 barcode         varchar(255) not NULL,
 name            varchar(100) NOT NULL,
+slug            varchar(255) not null,
 description     TEXT,
 price           float(11,2) NOT NULL,
 stock           int(255) NOT NULL,
@@ -54,7 +57,8 @@ created_at      DATETIME,
 updated_at      DATETIME,
 CONSTRAINT pk_products PRIMARY KEY(id),
 CONSTRAINT fk_product_category FOREIGN KEY(category_id) REFERENCES categories(id), 
-CONSTRAINT uq_barcode UNIQUE(barcode)
+CONSTRAINT uq_barcode UNIQUE(barcode),
+CONSTRAINT uq_slug UNIQUE(slug)
 )Engine=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 CREATE Table images(

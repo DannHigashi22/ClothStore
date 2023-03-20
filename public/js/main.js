@@ -116,3 +116,38 @@ let menu, animate;
   // Auto update menu collapsed/expanded based on the themeConfig
   window.Helpers.setCollapsed(true, false);
 })();
+
+// sort products
+$(document).ready(function(){
+  $("#sort").on("change",function(){
+    this.form.submit();
+  });
+});
+
+//cart update
+$(document).ready(function() {
+  $(".cartupdate").on("change",function(){
+    this.form.submit();
+  })
+});
+
+//search table
+$(document).ready(function(){
+  $("#jsearch").on("keyup",function(){
+    var value=$(this).val().toLowerCase();
+    $("#table-ad tr").filter(function(){
+      $(this).toggle($(this).text().toLowerCase().indexOf(value)> -1)
+    })
+  });
+});
+
+//delete confirmation
+$(document).ready(function () {
+  $(document).on("click", ".delete", function () {
+      var delete_id = $(this).attr('data-id');
+      var name=$(this).attr('data-value');
+      $('#id').val(delete_id);
+      $('#deleteModalLabel').text('Seguro que desea eliminar '+name+" ??");
+      $('#deleteModal').modal('show');
+  });
+});

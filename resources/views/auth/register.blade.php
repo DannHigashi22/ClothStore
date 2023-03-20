@@ -3,6 +3,7 @@
 @section('pagecss')
 <link rel="stylesheet" href="{{asset('vendor/css/pages/page-auth.css')}}" />
 @endsection
+@section('title',"ClothStore - Registro")
 
 @section('content')
 <div class="container-xxl">

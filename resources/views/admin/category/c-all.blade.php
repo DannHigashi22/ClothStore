@@ -19,23 +19,28 @@
             @endif
           </div>
             @if (!$categories->isEmpty())
+            <div class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-3 mb-2">
+              <input class="form-control" type="text" id="jsearch" placeholder="Ej: Polera">
+            </div>
             <div class="table-responsive h-75">
                 <table class="table">
                   <thead class="table-dark">
                     <tr>
                       <th>Nombre</th>
                       <th>Creado</th>
+                      <th>Productos</th>
                       <th>Acciones</th>
                     </tr>
                   </thead>
-                  <tbody class="table-border-bottom-0">
+                  <tbody class="table-border-bottom-0" id="table-ad">
                       @foreach ($categories as $category)
                           <tr>
                               <td><i class="text-danger"></i><strong>{{$category->name}}</strong></td>
-                              <td>{{$category->created_at}}</td>
+                              <td>{{date_format($category->created_at,'d/m/Y')}}</td>
+                              <td>{{count($category->products)}}</td>
                               <td>
-                                  <a class="btn btn-primary" href="{{route('a-category-edit',['id'=>$category->id])}}"><i class='bx bxs-edit-alt'></i></a>
-                                  <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                  <a class="btn btn-primary" href="{{route('a-category-edit',['slug'=>$category->slug])}}"><i class='bx bxs-edit-alt'></i></a>
+                                  <button type="button" class="btn btn-outline-danger delete" data-id={{$category->id}} data-value="{{$category->name}}">
                                     <i class='bx bxs-trash-alt'></i>
                                   </button>
                               </td>
@@ -45,20 +50,25 @@
                 </table>
               </div>
                <!-- Modal -->
-              <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+              <div class="modal fade" id="deleteModal" role="dialog" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="deleteModalLabel">Seguro que desea eliminar "{{$category->name}}"??</h1>
+                      <h1 class="modal-title fs-5" id="deleteModalLabel"></h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                      Esta accion es inreversible,tome precaucion.
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                      <a class="btn btn-outline-danger" href="{{route('a-category-delete',['id'=>$category->id])}}"><i class='bx bxs-trash-alt'></i> Eliminar</a>
-                    </div>
+                    <form action="{{route('a-category-delete')}}" method="post">
+                      @csrf
+                      @method('DELETE')
+                      <div class="modal-body">
+                        Esta accion es inreversible,tome precaucion.
+                        <input type="hidden" id='id' name="id">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-outline-danger"><i class='bx bxs-trash-alt'></i> Eliminar</button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>

@@ -20,6 +20,9 @@
                 <div class="alert alert-danger">{{session('message_error')}}</div>
             @endif
           </div>
+          <div class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-3 mb-2">
+            <input class="form-control" type="text" id="jsearch" placeholder="Ej: Polera">
+          </div>
                 <div class="table-responsive h-75">
                   <table class="table">
                     <thead class="table-dark">
@@ -32,7 +35,7 @@
                         <th>Acciones</th>
                       </tr>
                     </thead>
-                    <tbody class="table-border-bottom-0">
+                    <tbody class="table-border-bottom-0" id="table-ad">
                         @foreach ($users as $user)
                           @if ($user->id != Auth::user()->id)
                             <tr>

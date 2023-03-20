@@ -1,14 +1,15 @@
 @extends('layouts.shop')
 
-@section('title',"ClothStore - $category->name")
+@section('title',"ClothStore - $search")
 
 
 @section('content')
 <div class="container-xxl">
-<h2 class="mt-3 text-center">{{$category->name}}</h6>
+<h2 class="mt-3 text-center">Resultado de busqueda : "{{$search}}"</h6>
     @if (!$products->isEmpty())
         <div class="float-left">
-            <form method="get" id="sortproducts">
+            <form method="GET" id="sortproducts">
+                <input type="hidden" name="search" value="{{$search}}">
                 <label for="orderby" class="form-label mb-0">Ordenar por</label>
                 <select name="sort" class="form-select w-auto" id="sort" >
                     <option selected>Mas nuevo</option>
@@ -25,8 +26,8 @@
         </div>
     @else
         <br>
-        <h4 class="text-center">Lo sentimos no tenemos por el momento productos para esta categoria</h5>
-        <p class="text-center">No te preocupes, subiremos productos que te sorprenderan! </p>
+        <h4 class="text-center">Lo sentimos no se encontraron productos para tu busqueda</h5>
+        <p class="text-center">No te preocupes, prueba otra busqueda! </p>    
     @endif
 </div>
 @endsection

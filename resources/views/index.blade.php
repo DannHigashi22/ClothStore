@@ -79,23 +79,9 @@
 
         <!---products---->
         <h2 class="pb-1 mb-4 text-center">Nuestros productos</h6>
-        <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-4 mb-5">
+        <div class="row px-4 row-cols-1 row-cols-sm-3 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-4 mb-5">
           @foreach ($products as $product)
-            <div class="col">
-              <div class="card h-100 text-center">
-                @php
-                    $image=$product->images
-                @endphp
-                <a class="" href="{{route('s-product',['id'=>$product->id])}}">
-                  <img class="card-img-top" src="{{route('a-product-image',['filename'=>$image[0]->image_path])}}" alt="Card image cap" />
-                  <div class="card-body p-2">
-                    <h5 class="card-title text-center">{{$product->name}}</h5>
-                    <p class="card-text">${{$product->price}} CLP</p>
-                    <button class="btn btn-primary btn-lg" type="button">Añadir al carro <i class='bx bxs-cart-add bx-sm'></i></button>
-                  </div>
-                </a>
-              </div>
-            </div>
+            @include('includes.products',['product'=>$product])
           @endforeach
         </div>
         <!--- /products --->

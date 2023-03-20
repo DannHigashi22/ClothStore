@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -22,8 +23,17 @@ use App\Models\Product;
 Route::get('/home', [HomeController::class, 'redirectUser'])->name('home');
 
 Route::get('/',[HomeController::class,'index'])->name('index');
-Route::get('/product/{id}',[ProductController::class,'getId'])->name('s-product');
-Route::get('/category/{id}',[CategoryController::class,'getById'])->name('s-category');
+Route::get('/product/{slug}',[ProductController::class,'getProduct'])->name('s-product');
+Route::get('/product',[ProductController::class,'searchProduct'])->name('search');
+Route::get('/category/{slug}',[CategoryController::class,'getProductsCat'])->name('s-category');
+
+//carrito routes
+Route::get('/cart',[CarritoController::class,'index'])->name('cart');
+Route::post('/cart-add',[CarritoController::class,'add'])->name('add-cart');
+Route::post('/cart-remove',[CarritoController::class,'remove'])->name('cart-remove');
+Route::post('/cart-update',[CarritoController::class,'update'])->name('cart-update');
+Route::get('/cart-clear',[CarritoController::class,'clear'])->name('cart-clear');
+
 
 Auth::routes();
 
@@ -35,21 +45,25 @@ Route::middleware([Admin::class])->group(function(){
     Route::post('/admin/user/save',[AdminController::class,'userSave'])->name('a-user-save');
     Route::get('/admin/user/edit/{id?}',[UserController::class,'edit'])->name('a-user-edit');
     Route::post('/admin/user/edit/update/{id}',[UserController::class,'update'])->name('a-user-update');
-    Route::get('/admin/user/edit/delete/{id}',[UserController::class,'delete'])->name('a-user-delete');
+    Route::delete('/admin/user/edit/delete',[UserController::class,'delete'])->name('a-user-delete');
     //category
     Route::get('/admin/categories',[CategoryController::class,'getAll'])->name('a-categories');
     Route::get('/admin/categories/create',[CategoryController::class,'create'])->name('a-category-create');
     Route::post('/admin/categories/save',[CategoryController::class,'save'])->name('a-category-save');
-    Route::get('/admin/categories/edit/{id}',[CategoryController::class,'edit'])->name('a-category-edit');
+    Route::get('/admin/categories/edit/{slug}',[CategoryController::class,'edit'])->name('a-category-edit');
     Route::post('/admin/categories/update',[CategoryController::class,'update'])->name('a-category-update');
-    Route::get('/admin/categories/delete/{id}',[CategoryController::class,'delete'])->name('a-category-delete');
+    Route::delete('/admin/categories/delete',[CategoryController::class,'delete'])->name('a-category-delete');
     //products 
     Route::get('/admin/products',[ProductController::class,'getAll'])->name('a-products');
     Route::get('/admin/product/create',[ProductController::class,'create'])->name('a-product-create');
     Route::post('/admin/product/save',[ProductController::class,'save'])->name('a-product-save');
-    Route::get('/admin/product/{id}',[ProductController::class,'getOne'])->name('a-product');
+    Route::get('/admin/product/{slug}',[ProductController::class,'getOne'])->name('a-product');
     Route::get('/admin/product/image/{filename}',[ProductController::class,'getImage'])->withoutMiddleware([Admin::class])->name('a-product-image');
-    Route::get('/admin/product/edit/{id}',[ProductController::class,'edit'])->name('a-product-edit');
+    Route::get('/admin/product/edit/{slug}',[ProductController::class,'edit'])->name('a-product-edit');
     Route::post('/admin/product/update',[ProductController::class,'update'])->name('a-product-update');
-    Route::get('/admin/product/delete/{id}',[ProductController::class,'delete'])->name('a-product-delete');
+    Route::delete('/admin/product/delete',[ProductController::class,'delete'])->name('a-product-delete');
+    //orders
+    Route::get('admin/orders',[AdminController::class,'allOrders'])->name('a-orders');
+    Route::get('admin/order/{id}',[AdminController::class,'order'])->name('a-order');
+
 });

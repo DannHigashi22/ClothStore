@@ -41,6 +41,7 @@ class ProductController extends Controller
         if($images =$request->file('images')){
             $product=new Product();
             $product->name=Str::ucfirst($request->input('name'));
+            $product->slug=Str::slug($request->input('name'),'-');
             $product->description=Str::ucfirst($request->input('description'));
             $product->price=$request->input('price');
             $product->stock=$request->input('stock');
@@ -62,8 +63,8 @@ class ProductController extends Controller
         
     }
 
-    public function getOne($id){
-        $product=Product::findorfail($id);
+    public function getOne($slug){
+        $product=Product::where('slug','=',$slug)->firstOrFail();
         return view('admin.product.p-detail',['product'=>$product]);
     }
 
@@ -73,8 +74,8 @@ class ProductController extends Controller
     }
     
 
-    public function edit($id){
-        $product=Product::findorfail($id);
+    public function edit($slug){
+        $product=Product::where('slug','=',$slug)->firstOrFail();
         $cate=Category::all();
         return view('admin.product.p-edit',[
             'product'=>$product,
@@ -96,6 +97,7 @@ class ProductController extends Controller
         ]);
         $product=Product::findorfail($id);
         $product->name=Str::ucfirst($request->input('name'));
+        $product->slug=Str::slug($request->input('name'),'-');
         $product->description=Str::ucfirst($request->input('description'));
         $product->price=$request->input('price');
         $product->stock=$request->input('stock');
@@ -121,7 +123,8 @@ class ProductController extends Controller
         return redirect()->route('a-products')->with(['message'=>'Producto actualizada correctamente']);
     }
 
-    public function delete($id){
+    public function delete(Request $request){
+        $id=$request->id;
         $product=Product::findorfail($id);
         foreach ($product->images as $img) {
             Storage::disk('images')->delete($img->image_path);
@@ -133,9 +136,39 @@ class ProductController extends Controller
 
     /*Store Functions*/
 
-    public function getId($id){
-        $product=Product::findorfail($id);
+    public function getProduct($slug){
+        $product=Product::where('slug','=',$slug)->firstOrFail();
         return view('products.product',['product'=>$product]);
+    }
+
+    public function searchProduct(Request $request){
+        $validate=$this->validate($request, [
+            'search' => ['required','not_regex:/[0-9|_|-|$|@]/','max:50']
+        ]);
+        $search=$request->input('search');
+        $products=Product::where('name','LIKE','%'.$search.'%');
+
+        if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+            $sort=$_GET['sort'];
+            switch ($sort) {
+                case 'name':
+                    $products->orderBy('name','Asc');
+                    break;
+                
+                case 'price':
+                    $products->orderby('price','Asc');
+                    break;
+                
+                case 'most-sale':
+                    $products->orderby('stock','Asc');
+                    break;    
+            }
+        }
+        $products=$products->get();
+        return view('products.search',[
+            'products'=>$products,
+            'search'=>$search
+        ]);
     }
 
 

@@ -101,21 +101,7 @@
             <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-6 g-4 mb-5 mt-0">
               @foreach ($product->category->products as $cproduct)
                 @if ($product->id != $cproduct->id)
-                  <div class="col">
-                    <div class="card h-100 text-center">
-                    @php
-                        $image=$cproduct->images
-                    @endphp
-                      <a class="" href="{{route('s-product',['id'=>$cproduct->id])}}">
-                        <img class="card-img-top" src="{{route('a-product-image',['filename'=>$image[0]->image_path])}}" alt="Card image cap" />
-                        <div class="card-body p-2">
-                          <h5 class="card-title text-center">{{$cproduct->name}}</h5>
-                          <p class="card-text">${{$cproduct->price}} CLP</p>
-                          <button class="btn btn-primary btn-lg" type="button">Añadir al carro <i class='bx bxs-cart-add bx-sm'></i></button>
-                        </div>
-                      </a>
-                    </div>
-                  </div>  
+                  @include('includes.products',['product'=>$cproduct])
                 @endif
               @endforeach
             </div>

@@ -81,9 +81,9 @@
 
       <!-- Layouts -->
       <li class="menu-item">
-        <a href="" class="menu-link">
+        <a href="{{route('a-orders')}}" class="menu-link">
           <i class='menu-icon tf-icons bx bxs-shopping-bags' ></i>
-          <div data-i18n="Layouts">Pedidos</div>
+          <div data-i18n="Orders">Pedidos</div>
         </a>
       </li>
 
@@ -93,7 +93,7 @@
       <li class="menu-item">
         <a href="" class="menu-link menu-toggle">
           <i class='menu-icon tf-icons bx bx-category'></i>
-          <div data-i18n="Account Settings">Categorias</div>
+          <div data-i18n="Categories">Categorias</div>
         </a>
         <ul class="menu-sub">
           <li class="menu-item">
@@ -111,7 +111,7 @@
       <li class="menu-item">
         <a href="" class="menu-link menu-toggle">
           <i class='menu-icon tf-icons bx bx-closet'></i>
-          <div data-i18n="Authentications">Productos</div>
+          <div data-i18n="Products">Productos</div>
         </a>
         <ul class="menu-sub">
           <li class="menu-item">

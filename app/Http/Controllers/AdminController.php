@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -49,6 +50,19 @@ class AdminController extends Controller
             'password' => Hash::make($password),
         ]);
         return redirect()->route('a-users')->with(['message'=>'Usuario Creado correctamente']);
+    }
+
+    //orders
+    public function allOrders(){
+        $orders=Order::all();
+        return view('admin.orders.o-all',[
+            'orders'=>$orders]);
+    }
+
+    public function order($id){
+        $order=Order::where('id','=',$id)->firstOrFail();
+        return view('admin.orders.o-detail',[
+            'order'=>$order]);
     }
     
 }

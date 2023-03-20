@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','ClothStore - Administracion de Usuarios')
+@section('title','ClothStore - Administracion de Productos')
 @section('container')
 @parent
     @section('content')
@@ -22,6 +22,9 @@
             
           </div>
             @if (!$products->isEmpty())
+            <div class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-3 mb-2">
+              <input class="form-control" type="text" id="jsearch" placeholder="Ej: Polera">
+            </div>
             <div class="table-responsive h-75">
                 <table class="table">
                   <thead class="table-dark">
@@ -32,15 +35,15 @@
                       <th>Acciones</th>
                     </tr>
                   </thead>
-                  <tbody class="table-border-bottom-0">
+                  <tbody class="table-border-bottom-0" id="table-ad">
                       @foreach ($products as $product)
                           <tr>
-                              <td><a href="{{route('a-product',['id'=>$product->id])}}"><i class="text-danger"></i><strong>{{$product->name}}</strong></a></td>
+                              <td><a href="{{route('a-product',['slug'=>$product->slug])}}"><i class="text-danger"></i><strong>{{$product->name}}</strong></a></td>
                               <td>{{$product->price}}$</td>
                               <td>{{$product->stock}} Unidades</td>
                               <td>
-                                  <a class="btn btn-primary" href="{{route('a-product-edit',['id'=>$product->id])}}"><i class='bx bxs-edit-alt'></i></a>
-                                  <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                  <a class="btn btn-primary" href="{{route('a-product-edit',['slug'=>$product->slug])}}"><i class='bx bxs-edit-alt'></i></a>
+                                  <button type="button" class="btn btn-outline-danger delete" data-id={{$product->id}} data-value="{{$product->name}}">
                                     <i class='bx bxs-trash-alt'></i>
                                   </button>
                               </td>
@@ -54,16 +57,22 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="deleteModalLabel">Seguro que desea eliminar "{{$product->name}}"??</h1>
+                      <h1 class="modal-title fs-5" id="deleteModalLabel"></h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                      Esta accion es inreversible,tome precaucion.
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                      <a class="btn btn-outline-danger" href="{{route('a-product-delete',['id'=>$product->id])}}"><i class='bx bxs-trash-alt'></i> Eliminar</a>
-                    </div>
+                    <form action="{{route('a-product-delete')}}" method="post">
+                      @csrf
+                      @method('DELETE')
+                      <div class="modal-body">
+                        Esta accion es inreversible,tome precaucion.
+                        <input type="hidden" id='id' name="id">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger" ><i class='bx bxs-trash-alt'></i> Eliminar</button>
+                      </div>
+                    </form>
+                    
                   </div>
                 </div>
               </div>

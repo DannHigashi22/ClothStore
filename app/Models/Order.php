@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Entity\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +13,7 @@ class Order extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
-    public function order_detail(){
+    public function detail(){
         return $this->hasMany(Order_detail::class);
     }
 }
