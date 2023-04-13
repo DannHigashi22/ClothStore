@@ -35,7 +35,7 @@
                   <tbody class="table-border-bottom-0" id="table-ad">
                       @foreach ($categories as $category)
                           <tr>
-                              <td><i class="text-danger"></i><strong>{{$category->name}}</strong></td>
+                              <td><a href="{{route('a-category',['slug'=>$category->slug])}}"><strong>{{$category->name}}</strong></a></td>
                               <td>{{date_format($category->created_at,'d/m/Y')}}</td>
                               <td>{{count($category->products)}}</td>
                               <td>

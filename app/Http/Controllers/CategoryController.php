@@ -9,13 +9,19 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
+    // Admin Functions
     public function getAll(){
-        $categories=Category::all();
+        $categories=Category::all()->sortDesc();
         return view('admin.category.c-all',['categories'=>$categories]);
     }
 
     public function create(){
         return view('admin.category.c-create');
+    }
+
+    public function getOne($slug){
+        $cate=Category::where('slug','=',$slug)->firstOrFail();
+        return view('admin.category.c-detail',['category'=>$cate]);
     }
 
     public function save(Request $request){

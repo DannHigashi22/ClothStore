@@ -39,7 +39,7 @@
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}"/>
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" href="{{asset('vendor/libs/apex-charts/apex-charts.css')}}" />
 
     <!-- Page CSS -->

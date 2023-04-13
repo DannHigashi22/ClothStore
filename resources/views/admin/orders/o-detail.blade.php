@@ -22,7 +22,7 @@
                   </div>
                   <div class="mb-1 col-md-6">
                     <p><span class="form-label">Direccion</span> {{$order->shipping_address}}</p>
-                    <p><span class="form-label">Estado:</span> {{$order->status}}</p>
+                    <p><span class="form-label">Estado:</span> {{stringstatus($order->status)}}</p>
                     <p><span class="form-label">Total:</span> {{$order->total}}</p>
                   </div>
               </div>

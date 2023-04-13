@@ -9,7 +9,7 @@
         <div class="container-xxl min-vh-100">
           <div class="row">
             <div class="col-6">
-              <h5 class="card-header">Usuarios/Clientes</h5>
+              <h4 class="card-header">Usuarios/Clientes</h4>
             </div>
             <div class="col-6 align-self-center">
               <a class="btn btn-primary float-end me-4" href="{{route('a-user-register')}}"><i class='bx bx-plus-circle'></i>Añadir </a>
@@ -39,7 +39,7 @@
                         @foreach ($users as $user)
                           @if ($user->id != Auth::user()->id)
                             <tr>
-                              <td><i class="text-danger"></i><strong>{{$user->full_name}}</strong></td>
+                              <td><strong>{{$user->full_name}}</strong></td>
                               <td>{{$user->surnames}}</td>
                               <td>{{$user->email}}</td>
                               <td>{{$user->phone}}</td>

@@ -151,3 +151,52 @@ $(document).ready(function () {
       $('#deleteModal').modal('show');
   });
 });
+
+//date pickers
+  $('#filter-date').daterangepicker({
+      autoUpdateInput: false,
+      "locale": {
+        "format": "YYYY/MM/DD",
+        "applyLabel": "Aplicar",
+        "cancelLabel": "limpiar",
+        "daysOfWeek": [
+            "Do",
+            "Lu",
+            "Ma",
+            "Mi",
+            "Ju",
+            "Vi",
+            "Sa"
+        ],
+        "monthNames": [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre"
+        ]}
+  });
+
+  $('input[name="dateRange"]').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
+  });
+
+  $('input[name="dateRange"]').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+  });
+
+  $('#reset-filter').on("click",function(){
+    $('input[name="dateRange"]').val('');
+    $('select[name=status]').val('');
+    window.location.href = '/admin/orders';
+
+  });
+
+

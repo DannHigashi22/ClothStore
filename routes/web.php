@@ -21,7 +21,6 @@ use App\Models\Product;
 |
 */
 Route::get('/home', [HomeController::class, 'redirectUser'])->name('home');
-
 Route::get('/',[HomeController::class,'index'])->name('index');
 Route::get('/product/{slug}',[ProductController::class,'getProduct'])->name('s-product');
 Route::get('/product',[ProductController::class,'searchProduct'])->name('search');
@@ -39,31 +38,32 @@ Auth::routes();
 
 Route::middleware([Admin::class])->group(function(){
     Route::get('/admin',[AdminController::class,'dashboard'])->name('admin');
+    Route::get('/admin/analytics',[AdminController::class,'analytics'])->name('a-analytics');
     //users
     Route::get('/admin/users',[AdminController::class,'allUsers'])->name('a-users');
-    Route::get('/admin/user/register',[AdminController::class,'userRegister'])->name('a-user-register');
-    Route::post('/admin/user/save',[AdminController::class,'userSave'])->name('a-user-save');
-    Route::get('/admin/user/edit/{id?}',[UserController::class,'edit'])->name('a-user-edit');
-    Route::post('/admin/user/edit/update/{id}',[UserController::class,'update'])->name('a-user-update');
-    Route::delete('/admin/user/edit/delete',[UserController::class,'delete'])->name('a-user-delete');
+    Route::get('/admin/users/register',[AdminController::class,'userRegister'])->name('a-user-register');
+    Route::post('/admin/users/save',[AdminController::class,'userSave'])->name('a-user-save');
+    Route::get('/admin/users/edit/{id?}',[UserController::class,'edit'])->name('a-user-edit');
+    Route::post('/admin/users/edit/update/{id}',[UserController::class,'update'])->name('a-user-update');
+    Route::delete('/admin/users/edit/delete',[UserController::class,'delete'])->name('a-user-delete');
     //category
     Route::get('/admin/categories',[CategoryController::class,'getAll'])->name('a-categories');
     Route::get('/admin/categories/create',[CategoryController::class,'create'])->name('a-category-create');
     Route::post('/admin/categories/save',[CategoryController::class,'save'])->name('a-category-save');
+    Route::get('/admin/category/{slug}',[CategoryController::class,'getOne'])->name('a-category');
     Route::get('/admin/categories/edit/{slug}',[CategoryController::class,'edit'])->name('a-category-edit');
     Route::post('/admin/categories/update',[CategoryController::class,'update'])->name('a-category-update');
     Route::delete('/admin/categories/delete',[CategoryController::class,'delete'])->name('a-category-delete');
     //products 
     Route::get('/admin/products',[ProductController::class,'getAll'])->name('a-products');
-    Route::get('/admin/product/create',[ProductController::class,'create'])->name('a-product-create');
-    Route::post('/admin/product/save',[ProductController::class,'save'])->name('a-product-save');
-    Route::get('/admin/product/{slug}',[ProductController::class,'getOne'])->name('a-product');
-    Route::get('/admin/product/image/{filename}',[ProductController::class,'getImage'])->withoutMiddleware([Admin::class])->name('a-product-image');
-    Route::get('/admin/product/edit/{slug}',[ProductController::class,'edit'])->name('a-product-edit');
-    Route::post('/admin/product/update',[ProductController::class,'update'])->name('a-product-update');
-    Route::delete('/admin/product/delete',[ProductController::class,'delete'])->name('a-product-delete');
+    Route::get('/admin/products/create',[ProductController::class,'create'])->name('a-product-create');
+    Route::post('/admin/products/save',[ProductController::class,'save'])->name('a-product-save');
+    Route::get('/admin/products/{slug}',[ProductController::class,'getOne'])->name('a-product');
+    Route::get('/admin/products/image/{filename}',[ProductController::class,'getImage'])->withoutMiddleware([Admin::class])->name('a-product-image');
+    Route::get('/admin/products/edit/{slug}',[ProductController::class,'edit'])->name('a-product-edit');
+    Route::post('/admin/products/update',[ProductController::class,'update'])->name('a-product-update');
+    Route::delete('/admin/products/delete',[ProductController::class,'delete'])->name('a-product-delete');
     //orders
     Route::get('admin/orders',[AdminController::class,'allOrders'])->name('a-orders');
     Route::get('admin/order/{id}',[AdminController::class,'order'])->name('a-order');
-
 });

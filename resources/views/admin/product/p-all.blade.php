@@ -9,7 +9,7 @@
         <div class="container-xxl min-vh-100">
           <div class="row">
             <div class="col-6">
-              <h5 class="card-header">Productos</h5>
+              <h4 class="card-header">Productos</h4>
             </div>
             <div class="col-6 align-self-center">
               <a class="btn btn-primary float-end me-4" href="{{route('a-product-create')}}"><i class='bx bx-plus-circle'></i>Añadir</a>
@@ -25,23 +25,25 @@
             <div class="col-8 col-sm-5 col-md-4 col-lg-3 col-xl-3 mb-2">
               <input class="form-control" type="text" id="jsearch" placeholder="Ej: Polera">
             </div>
-            <div class="table-responsive h-75">
-                <table class="table">
+            <div class="table-responsive-sm h-75 ">
+                <table class="table fs-6">
                   <thead class="table-dark">
                     <tr>
-                      <th>Nombre</th>
-                      <th>Precio</th>
-                      <th>Stock</th>
-                      <th>Acciones</th>
+                      <th scope="col">Nombre</th>
+                      <th>Sku</th>
+                      <th scope="col">Precio</th>
+                      <th scope="col">Stock</th>
+                      <th scope="col">Acciones</th>
                     </tr>
                   </thead>
                   <tbody class="table-border-bottom-0" id="table-ad">
                       @foreach ($products as $product)
                           <tr>
-                              <td><a href="{{route('a-product',['slug'=>$product->slug])}}"><i class="text-danger"></i><strong>{{$product->name}}</strong></a></td>
-                              <td>{{$product->price}}$</td>
-                              <td>{{$product->stock}} Unidades</td>
-                              <td>
+                              <td class="text-nowrap" scope="row"><a class="fw-bold fs-5" href="{{route('a-product',['slug'=>$product->slug])}}">{{$product->name}}</a></td>
+                              <td>{{$product->barcode}}</td>
+                              <td>{{$product->price}}</td>
+                              <td>{{$product->stock}}</td>
+                              <td class="text-nowrap" >
                                   <a class="btn btn-primary" href="{{route('a-product-edit',['slug'=>$product->slug])}}"><i class='bx bxs-edit-alt'></i></a>
                                   <button type="button" class="btn btn-outline-danger delete" data-id={{$product->id}} data-value="{{$product->name}}">
                                     <i class='bx bxs-trash-alt'></i>
@@ -51,7 +53,7 @@
                       @endforeach
                   </tbody>
                 </table>
-              </div>
+            </div>
                <!-- Modal -->
               <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                 <div class="modal-dialog">

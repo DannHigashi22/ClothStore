@@ -14,7 +14,7 @@ class ProductController extends Controller
 {
     /* Admin Functions*/
     public function getAll(){
-        $products=Product::all();
+        $products=Product::all()->sortDesc();
         return view('admin.product.p-all',['products'=>$products]);
     }
 

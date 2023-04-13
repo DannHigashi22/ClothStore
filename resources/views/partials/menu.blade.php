@@ -72,54 +72,55 @@
 
     <ul class="menu-inner py-1">
       <!-- Dashboard -->
-      <li class="menu-item">
+      <li class="menu-item {{(Request::path() == 'admin')? 'active' : ''}} ">
         <a href="{{route('admin')}}" class="menu-link">
           <i class='menu-icon tf-icons bx bxs-dashboard' ></i>
           <div data-i18n="Analytics">Dashboard</div>
         </a>
       </li>
 
-      <!-- Layouts -->
-      <li class="menu-item">
+      <!-- Orders -->
+      <li class="menu-item {{(Request::path() == 'admin/orders')? 'active' : ''}}">
         <a href="{{route('a-orders')}}" class="menu-link">
           <i class='menu-icon tf-icons bx bxs-shopping-bags' ></i>
           <div data-i18n="Orders">Pedidos</div>
         </a>
       </li>
 
+      <!-- Gestion -->
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">Gestion</span>
       </li>
-      <li class="menu-item">
+      <li class="menu-item {{Request::is('admin/categories*')? 'active open' : ''}}">
         <a href="" class="menu-link menu-toggle">
           <i class='menu-icon tf-icons bx bx-category'></i>
           <div data-i18n="Categories">Categorias</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item">
+          <li class="menu-item {{(Request::path() == 'admin/categories/create') ? 'active' : ''}}">
             <a href="{{route('a-category-create')}}" class="menu-link">
               <div data-i18n="Basic">Añadir Categoria</div>
             </a>
           </li>
-          <li class="menu-item">
+          <li class="menu-item {{(Request::path() == 'admin/categories') ? 'active ' : ''}}">
             <a href="{{route('a-categories')}}" class="menu-link">
               <div data-i18n="Basic">Ver Todos</div>
             </a>
           </li>
         </ul>
       </li>
-      <li class="menu-item">
+      <li class="menu-item {{Request::is('admin/products*')? 'active open' : ''}}">
         <a href="" class="menu-link menu-toggle">
           <i class='menu-icon tf-icons bx bx-closet'></i>
           <div data-i18n="Products">Productos</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item">
+          <li class="menu-item {{(Request::path() == 'admin/products/create') ? 'active' : ''}}">
             <a href="{{route('a-product-create')}}" class="menu-link">
               <div data-i18n="Basic">Añadir Producto</div>
             </a>
           </li>
-          <li class="menu-item">
+          <li class="menu-item {{(Request::path() == 'admin/products') ? 'active' : ''}}">
             <a href="{{route('a-products')}}" class="menu-link">
               <div data-i18n="Basic">Ver Todos</div>
             </a>
@@ -132,22 +133,23 @@
           <div data-i18n="Authentications">Paginas</div>
         </a>
       </li>
-      <!-- menu user-->
+
+      <!-- Users -->
       <li class="menu-header small text-uppercase">
         <span class="menu-header-text">Usuarios</span>
       </li>
-      <li class="menu-item">
+      <li class="menu-item {{Request::is('admin/users*')? 'active open' : ''}}">
         <a href="" class="menu-link menu-toggle">
           <i class='menu-icon bx bxs-user-rectangle'></i>
           <div data-i18n="Authentications">Usuarios/Clientes</div>
         </a>
         <ul class="menu-sub">
-          <li class="menu-item">
+          <li class="menu-item {{Request::is('admin/users/register')? 'active' : ''}}">
             <a href="{{route('a-user-register')}}" class="menu-link">
               <div data-i18n="Basic">Crear Usuario</div>
             </a>
           </li>
-          <li class="menu-item">
+          <li class="menu-item {{Request::is('admin/users')? 'active' : ''}}">
             <a href="{{route('a-users')}}" class="menu-link">
               <div data-i18n="Basic">Ver Todos</div>
             </a>
