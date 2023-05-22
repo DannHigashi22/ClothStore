@@ -2,25 +2,86 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 use Carbon\Carbon;
 
 class AdminController extends Controller
 {
     public function dashboard(){
+        //pedido y ventas de hoy
         $today=Carbon::now()->format('Y/m/d');
         $orderstoday=Order::whereDate('created_at',$today);
+        //pedidos y ventas totales
         $orders=Order::all();
+        //Recientes
+        $rUser=User::selectRaw("concat(full_name,' ',surnames) as name")->orderBy('id','desc')->first();
+        $rProduct=Product::select('name')->orderBy('id','desc')->first();
+        $rOrder=Order::select('id')->orderBy('id','desc')->first();
+        $rCategory=Category::select('name')->orderBy('id','desc')->first();
+        //productos mas vendidos
+        $mostsales=Product::selectRaw('products.*,sum(orders_detail.total) as total')
+        ->join('orders_detail','products.id','=','orders_detail.product_id')->groupBy('products.id')->limit(4)->get();
         
-        return view('admin.dash',['today'=>$today,'orders'=>$orders,'orderstoday'=>$orderstoday]);
+        return view('admin.dash',[
+            'today'=>$today,
+            'orders'=>$orders,
+            'orderstoday'=>$orderstoday,
+            'pMostsales'=>$mostsales,
+            'recently'=>[$rUser->name,$rProduct->name,$rOrder->id,$rCategory->name]
+        ]);
     }
     public function analytics(){
-        $orders=Order::all();
-        return response()->json(['data'=>$orders]);
+        //variables
+        $presentYear=Carbon::now()->format('Y');
+        $lastYear=Carbon::now()->subYear()->format('Y');
+
+        //venta por año
+        function salesYear($year){
+            $rawsql="WITH RECURSIVE all_dates AS (
+                SELECT '2023-01-01' AS dt 
+                UNION ALL
+                SELECT dt + INTERVAL 1 month FROM all_dates WHERE dt < '2023-11-31'
+              )
+              SELECT COALESCE(total, 0) AS total FROM all_dates
+              LEFT JOIN (SELECT DATE_FORMAT(created_at,'%b %Y') as 'mes', sum(total) as total FROM `orders` WHERE year(created_at)=$year GROUP BY month(created_at)) as sales on DATE_FORMAT(dt,'%b %Y')=mes";
+            return $rawsql;
+        }
+        $salesPresentYear=DB::select(salesYear($presentYear));
+        $salesLastYear=DB::select(salesYear($lastYear));
+
+        //orders last 6 days
+        $queryOl="WITH RECURSIVE days AS (
+            SELECT curdate() AS dt 
+            UNION ALL
+            SELECT dt - INTERVAL 1 day FROM days WHERE dt > date_add(NOW(), INTERVAL -5 DAY)
+          )
+            SELECT COALESCE(pedidos, 0) AS pedidos,date_format(dt,'%b-%d') as dias FROM days 
+            LEFT JOIN (SELECT count(id) as pedidos,date_format(created_at,'%m-%d') as fecha FROM orders GROUP BY date_format(created_at,'%Y-%m-%d'))as orders_date on date_format(dt, '%m-%d')=fecha";
+        $orderLast=Db::select($queryOl);
+
+        //sales categories
+        $salesCategories=Category::selectRaw("categories.name ,coalesce(sum(orders_detail.total),0) as total")
+        ->leftjoin('products','categories.id','=','products.category_id')
+        ->leftjoin('orders_detail','products.id','=','orders_detail.product_id')
+        ->groupBy('categories.id')->get();
+
+        $data=[
+            'salesPresentYear'=>$salesPresentYear,
+            'presentYear'=>$presentYear,
+            'salesLastYear'=>$salesLastYear,
+            'lastYear'=>$lastYear,
+            'ordersLast6'=>$orderLast,
+            'salesCategories'=>$salesCategories
+        ];
+ 
+        return response()->json($data,200);
     }
 
     //users methods
