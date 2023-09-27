@@ -12,8 +12,12 @@
             <form action="{{route('add-cart')}}" method="post">
                 @csrf
                 <input type="hidden" name="product" value="{{$product->slug}}">
-                <button class="btn btn-primary btn-lg" type="submit">Añadir al carro <i class='bx bxs-cart-add bx-sm'></i></button>
+                @if (($product->stock) > 1 )
+                    <button class="btn btn-primary btn-lg" type="submit">Añadir al carro <i class='bx bxs-cart-add bx-sm'></i></button>
+                @else
+                    <div class="alert alert-warning">Sin Stock</div>
+                @endif
             </form>
         </div>
     </div>
-</div>
+</div> 

@@ -9,7 +9,7 @@
         <a href="{{route('index')}}">Home</a>
       </li>
       <li class="breadcrumb-item">
-        <a href="javascript:void(0);">{{$product->category->name}}</a>
+        <a href="{{route('s-category',['slug'=>$product->category->slug])}}">{{$product->category->name}}</a>
       </li>
       <li class="breadcrumb-item active">{{$product->name}}</li>
     </ol>
@@ -41,7 +41,15 @@
             <div class="">
                 <h2>{{$product->name}}</h2>
                 <h3>${{$product->price}}</h3>
-                <button class="btn btn-primary btn-md" type="button">Añadir al carro <i class='bx bxs-cart-add bx-sm'></i></button>
+                <form action="{{route('add-cart')}}" method="post">
+                  @csrf
+                  <input type="hidden" name="product" value="{{$product->slug}}">
+                  @if (($product->stock) > 1 )
+                  <button type="submit" class="btn btn-primary btn-md" type="button">Añadir al carro <i class='bx bxs-cart-add bx-sm'></i></button>
+                  @else
+                      <div class="alert alert-warning">Sin Stock, en proximos dias tendremos mas de tus productos favoritos</div>
+                  @endif
+              </form>
             </div>
             <div class="mt-2">
                 <h4>Descripcion</h4>
@@ -63,10 +71,7 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane fade show active" id="navs-justified-home" role="tabpanel">
-                <p>{{$product->description}}</p>
-                <p class="mb-0">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi temporibus nesciunt, magnam velit repellendus suscipit voluptatum quas provident consequuntur. Ex corporis dignissimos ratione sed facilis quidem eos voluptatum, voluptatem molestias?
-                </p>
+                {!!$product->description!!}
               </div>
               <div class="tab-pane fade" id="navs-justified-profile" role="tabpanel">
                 <div class="row">

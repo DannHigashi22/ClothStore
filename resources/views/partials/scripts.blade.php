@@ -18,6 +18,7 @@
     <script src="{{asset('js/main.js')}}"></script>
 
     <!-- Page JS -->
+    @yield('pagejs')
     <script src="{{asset('js/dashboards-analytics.js')}}"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->

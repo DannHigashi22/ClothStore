@@ -27,7 +27,7 @@ class AdminController extends Controller
         $rCategory=Category::select('name')->orderBy('id','desc')->first();
         //productos mas vendidos
         $mostsales=Product::selectRaw('products.*,sum(orders_detail.total) as total')
-        ->join('orders_detail','products.id','=','orders_detail.product_id')->groupBy('products.id')->limit(4)->get();
+        ->join('orders_detail','products.id','=','orders_detail.product_id')->groupBy('products.id')->limit(4)->orderBy('total','desc')->get();
         
         return view('admin.dash',[
             'today'=>$today,

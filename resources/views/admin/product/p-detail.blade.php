@@ -25,7 +25,7 @@
                   </div>
                   <div class="mb-1 col-md-6"> 
                     <p><span>Nombre:</span>{{$product->name}}</p>
-                    <p><span>Descripcion:</span>{{$product->description}}</p>
+                    <p><span>Descripcion:</span>{!! $product->description !!}</p>
                   </div>
                   <div class="mb-1 col-md-6">
                     <p><span class="form-label">Precio:</span> {{$product->price}}</p>

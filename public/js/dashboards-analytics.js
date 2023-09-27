@@ -14,7 +14,6 @@
   //chart refresh--------------------
   var url = 'http://127.0.0.1:8000/admin/analytics';
   $.getJSON(url, (response) => {
-  console.log(response);
   var analytics=response;
   //sales years
   var salesPresentYear=analytics['salesPresentYear'].map( (item) => item.total);

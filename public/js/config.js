@@ -25,3 +25,12 @@ let config = {
     borderColor: '#eceef1'
   }
 };
+
+tinymce.init({
+  selector: '#descripproduct',
+  width: "100%",
+  menubar: false,
+  plugins: 'emoticons advlist lists table charmap fullscreen wordcount preview',
+  toolbar: "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | table | lineheight outdent indent | forecolor backcolor removeformat | charmap emoticons | fullscreen preview | print ",
+  table_toolbar: 'tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol'
+});

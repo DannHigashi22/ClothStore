@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 @section('title','ClothStore - Administracion de Usuarios')
+@section('pageHeader')
+<script src="{{asset('js/tinymce/tinymce.min.js')}}" referrerpolicy="origin"></script>
+
+@endsection
 @section('container')
 @parent
 @section('content')
@@ -27,7 +31,7 @@
             @csrf
             <div class="row">
               <div class="mb-2 col-md-6">
-                <input type="hidden" name="id" value="{{$product->id}}">
+                  <input type="hidden" name="id" value="{{$product->id}}">
                 <label for="name" class="form-label">Nombre</label>
                 <input class="form-control @error('name') is-invalid @enderror" type="text" name="name" value="{{$product->name}}">
                 @error('images')
@@ -35,9 +39,19 @@
                     <strong>{{ $message }}</strong>
                   </span>
                 @enderror
-
+              </div>
+              <div class="mb-2 col-md-6">
+                  <label for="price" class="form-label">Precio</label>
+                  <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{$product->price}}">
+                  @error('price')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+              </div>
+              <div class="mb-2 col-md-12">
                 <label for="description" class="form-label">Descripcion</label>
-                <textarea class="form-control @error('description') is-invalid @enderror" name="description" cols="20" rows="10">{{$product->description}}</textarea>
+                <textarea id="descripproduct"class="form-control @error('description') is-invalid @enderror" name="description" cols="20" rows="10">{{$product->description}}</textarea>
                 @error('description')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -45,14 +59,6 @@
                 @enderror
               </div>
               <div class="mb-2 col-md-6">
-                <label for="price" class="form-label">Precio</label>
-                <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{$product->price}}">
-                @error('price')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
-
                 <label class="form-label" for="stock">Stock</label>
                 <input type="text" name="stock" class="form-control @error('stock') is-invalid @enderror" value="{{$product->stock}}">
                 @error('stock')
@@ -60,7 +66,8 @@
                     <strong>{{ $message }}</strong>
                   </span>
                 @enderror
-
+              </div>
+              <div class="mb-2 col-md-6">
                 <label for="barcode" class="form-label">Codigo de barras</label>
                 <input type="text" class="form-control @error('barcode') is-invalid @enderror" name="barcode" value="{{$product->barcode}}">
                 @error('barcode')
@@ -68,7 +75,8 @@
                     <strong>{{ $message }}</strong>
                   </span>
                 @enderror
-
+              </div>
+              <div class="mb-2 col-md-6">
                 <label for="category" class="form-label">Categoria</label>
                 <select name="category" class="form-select @error('category') is-invalid @enderror">
                   <option>Seleccione categoria</option>
@@ -81,18 +89,20 @@
                     <strong>{{ $message }}</strong>
                   </span>
                 @enderror
+              </div>
+              <div class="mb-2 col-md-6">
                 <label for="images" class="form-label">Imagenes</label>
-                    <input class="form-control @error('images') is-invalid @enderror @error('images.*') is-invalid @enderror" type="file" name="images[]" multiple="multiple">
-                    @error('images')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                    @error('images.*')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{$message}}</strong>
-                        </span>
-                    @enderror
+                  <input class="form-control @error('images') is-invalid @enderror @error('images.*') is-invalid @enderror" type="file" name="images[]" multiple="multiple">
+                  @error('images')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+                  @error('images.*')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{$message}}</strong>
+                    </span>
+                  @enderror
               </div>
               <div class="col-12 mt-2 d-flex justify-content-end">
                 <input class="btn btn-primary " type="submit" value="Actualizar">
@@ -107,3 +117,4 @@
 <!-- / Content -->
 @endsection
 @endsection
+
