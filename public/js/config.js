@@ -26,6 +26,8 @@ let config = {
   }
 };
 
+
+// rich text producto  
 tinymce.init({
   selector: '#descripproduct',
   width: "100%",

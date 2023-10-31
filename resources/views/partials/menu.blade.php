@@ -89,7 +89,7 @@
 
       <!-- Gestion -->
       <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">Gestion</span>
+        <span class="menu-header-text">Tienda</span>
       </li>
       <li class="menu-item {{Request::is('admin/categories*')? 'active open' : ''}}">
         <a href="" class="menu-link menu-toggle">
@@ -130,31 +130,37 @@
       <li class="menu-item">
         <a href="" class="menu-link">
           <i class='menu-icon tf-icons bx bx-windows'></i>
-          <div data-i18n="Authentications">Paginas</div>
+          <div data-i18n="pages">Paginas</div>
         </a>
       </li>
 
       <!-- Users -->
       <li class="menu-header small text-uppercase">
-        <span class="menu-header-text">Usuarios</span>
+        <span class="menu-header-text">Clientes</span>
       </li>
       <li class="menu-item {{Request::is('admin/users*')? 'active open' : ''}}">
         <a href="" class="menu-link menu-toggle">
           <i class='menu-icon bx bxs-user-rectangle'></i>
-          <div data-i18n="Authentications">Usuarios/Clientes</div>
+          <div data-i18n="coustumers">Usuarios/Clientes</div>
         </a>
         <ul class="menu-sub">
           <li class="menu-item {{Request::is('admin/users/register')? 'active' : ''}}">
             <a href="{{route('a-user-register')}}" class="menu-link">
-              <div data-i18n="Basic">Crear Usuario</div>
+              <div data-i18n="createCoust">Crear Usuario</div>
             </a>
           </li>
           <li class="menu-item {{Request::is('admin/users')? 'active' : ''}}">
             <a href="{{route('a-users')}}" class="menu-link">
-              <div data-i18n="Basic">Ver Todos</div>
+              <div data-i18n="allCoust">Ver Todos</div>
             </a>
           </li>
         </ul>
+      </li>
+      <li class="menu-item">
+        <a href="" class="menu-link">
+          <i class='menu-icon tf-icons bx bx-envelope'></i>
+          <div>Mensajes</div>
+        </a>
       </li>
     </ul>
 </aside>

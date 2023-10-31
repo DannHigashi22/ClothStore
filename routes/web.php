@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Admin;
@@ -66,4 +67,9 @@ Route::middleware([Admin::class])->group(function(){
     //orders
     Route::get('admin/orders',[AdminController::class,'allOrders'])->name('a-orders');
     Route::get('admin/order/{id}',[AdminController::class,'order'])->name('a-order');
+
+    //page
+    Route::get('admin/pages',[PageController::class,'getAll'])->name('a-pages');
+    Route::get('admin/page/{slug}',[PageController::class,'getAll'])->name('a-page');
+    
 });
